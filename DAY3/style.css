@@ -31,3 +31,7 @@ a{
     margin:20px auto 0;
     font-size:2.6rem;
 }
+
+@media (max-width: 768px) {
+   
+}
