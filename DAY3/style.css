@@ -32,11 +32,35 @@ a{
     font-size:2.6rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .wrapper-main{
         width:100%;
-        padding:100px 0;
-        margin:0 auto;
-        border: 4px solid blue;
+        backround-color:red;
+    }
+}
+
+/*<600px, 601px, 768px, 992px, 1200px */
+
+@media (max-width:601px){
+    h1{
+        font-size: 6.2rem;
+    }
+    p{
+        font-size:2.2rem;
+    }
+    a{
+        font-size:2.2rem;
+    }
+}
+
+@media (max-width:768px){
+    h1{
+        font-size: 7.2rem;
+    }
+    p{
+        font-size:2.4rem;
+    }
+    a{
+        font-size:2.4rem;
     }
 }
