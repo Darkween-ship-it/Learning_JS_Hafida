@@ -1,0 +1,9 @@
+@import url(https://fonts.google.com/specimen/Red+Hat+Display);
+
+
+*{
+    padding:0;
+    margin:0;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 500, 700, 900;
+}
