@@ -71,7 +71,7 @@ p{
     display:flex;
     flex-direction:column;
     width:100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -84,6 +84,7 @@ p{
 h4{
     font-size: 0.875em;
     color: hsl(223, 47%, 23%);
+    justify-content: space-between;
 }
 
 .container p{
