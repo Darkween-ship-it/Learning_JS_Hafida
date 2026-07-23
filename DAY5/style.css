@@ -119,3 +119,12 @@ nav{
     width:25px;
     margin-right:15px;
 }
+
+.imp-links a:last-child{
+    color:#1876f2;
+}
+
+.imp-links{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
