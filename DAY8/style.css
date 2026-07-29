@@ -5,7 +5,7 @@
 }
 
 body{
-    background: linear-gradient(to right, rgb(94, 94, 248),rgb(138, 179, 250));
+    background:white
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@ body{
 }
 
 main{
-    margin:100px 500px;
+    margin:200px 500px;
     height:300px;
     width:400px;
     align-items:center;
@@ -24,15 +24,32 @@ main{
 
 h1{
     align-items: center;
-    margin:
+    margin-bottom: 1.5rem;
+    color: red;
+    margin-left: 5rem;
+}
+
+p{
+    margin-bottom: 1rem;
+    margin-left: 4rem;
 }
 
 div{
-    background: white;
-    border: 1px solid white;
-    border-radius: 20px;
+    background:black;
+    border: 1px solid black;
+    border-radius: 16px;
     align-items: center;
     justify-content: center;
-    height:50px;
-    padding: 1rem 8rem;
+    height:60px;
+    padding: 1rem 5rem;
+    display: flex;
+    flex-direction: space-between;
+    gap: 16px;
+}
+
+input{
+    background: white
+    border-radius: 15px;
+    width: 200px;
+    height: 2rem;
 }
