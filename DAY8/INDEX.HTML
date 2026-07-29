@@ -4,14 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guessing Game</title>
-    <script>
-        function Compare(){
-            let guess=Math.random()*10
-        }
-    </script>
+   
 </head>
 <body>
     <h1>Guessing Game</h1>
-    <p id="ask">Enter a number between 0 and 10</p>
+    <p>Enter a number between 1 and 10</p>
+    <input type="number" name="input" id="value" max="10" min="1" autofocus>
+    <button type="submit" onclick="game()">Submit</button>
+    <p id="response"></p>
+
+     <script>
+        const input =document.getElementById('value').value;
+        const response =document.getElementById('response');
+        let guess=Math.floor(Math.random()*10)+1;
+        // let i=0;
+        function game(value){
+            let think = guess;
+            value=input;
+            let review = response;
+            while(value != think){
+                 if(value > think){
+                     review.innerHTML="Too high"; 
+                 }else if(value < think){
+                     review.innerHTML="Too low";
+                 }else{
+                     review.innerHTML="Congratulations you've found the number";
+                     break;
+                 }
+           }
+        }
+
+    </script>
 </body>
 </html>
