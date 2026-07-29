@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
    
 </head>
 <body>
-    <h1>Guessing Game</h1>
-    <p>Enter a number between 1 and 10</p>
-    <input type="number" name="input" id="value" max="10" min="1" autofocus>
-    <button type="submit" onclick="game()">Submit</button>
-    <p id="response"></p>
+            <main>
+                <h1>Guessing Game</h1>
+                <p>Enter a number between 1 and 10</p>
+                <div>
+                    <input type="number" name="input" id="value" max="10" min="1" autofocus>
+                    <button type="submit" onclick="game()">Submit</button>
+                    <p id="response"></p>
+                </div>
+            </main>
+    
 
     <script>
         let guess=Math.floor(Math.random()*10)+1;
@@ -21,21 +27,13 @@
         function game(){
             let userGuess = Number(inputElement.value);
 
-            if(!inputElement.value){
-                response.innerHTML = "Please enter a valid number!";
-                return;
-            }
                  if(userGuess > guess){
                      response.innerHTML="Too high"; 
-                 }else if(userGuess < think){
+                 }else if(userGuess < guess){
                      response.innerHTML="Too low";
                  }else{
                      response.innerHTML="Congratulations you've found the number";
-                     inputElement.disabled = true;
                  }
-
-                 inputElement.value ="";
-                 inputElement.focus();
            }
     </script>
 </body>
