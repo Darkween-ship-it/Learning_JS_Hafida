@@ -20,13 +20,22 @@
         // let i=0;
         function game(){
             let userGuess = Number(inputElement.value);
+
+            if(!inputElement.value){
+                response.innerHTML = "Please enter a valid number!";
+                return;
+            }
                  if(userGuess > guess){
                      response.innerHTML="Too high"; 
                  }else if(userGuess < think){
                      response.innerHTML="Too low";
                  }else{
                      response.innerHTML="Congratulations you've found the number";
+                     inputElement.disabled = true;
                  }
+
+                 inputElement.value ="";
+                 inputElement.focus();
            }
     </script>
 </body>
