@@ -13,27 +13,21 @@
     <button type="submit" onclick="game()">Submit</button>
     <p id="response"></p>
 
-     <script>
-        const input =document.getElementById('value').value;
-        const response =document.getElementById('response');
+    <script>
         let guess=Math.floor(Math.random()*10)+1;
+        const inputElement =document.getElementById('value');
+        const response =document.getElementById('response');
         // let i=0;
-        function game(value){
-            let think = guess;
-            value=input;
-            let review = response;
-            while(value != think){
-                 if(value > think){
-                     review.innerHTML="Too high"; 
-                 }else if(value < think){
-                     review.innerHTML="Too low";
+        function game(){
+            let userGuess = Number(inputElement.value);
+                 if(userGuess > guess){
+                     response.innerHTML="Too high"; 
+                 }else if(userGuess < think){
+                     response.innerHTML="Too low";
                  }else{
-                     review.innerHTML="Congratulations you've found the number";
-                     break;
+                     response.innerHTML="Congratulations you've found the number";
                  }
            }
-        }
-
     </script>
 </body>
 </html>
