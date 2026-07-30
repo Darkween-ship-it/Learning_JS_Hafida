@@ -4,36 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="SCRIPT.JS" defer></script>
 </head>
 <body>
     <main>
+          
         <h1>WELCOME TO YOUR SHAPE AREA CALCULATOR</h1>
         <P>Choose from the list of shapes below to calculate its shape</P>
         <div class="shape-icons">
-            <div class="shape-card" onclick="">
+            <div class="shape-card" onclick="AreaSquare(a)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                     <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                     <path d="M160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160C96 124.7 124.7 96 160 96z"/>
                 </svg>
                 <p class="shape">square</p>
             </div>
-            <div class="shape-card">
+            <div class="shape-card" onclick="AreaTriangle(b,h)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-triangle-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767z"/>
                     </svg>
                     <p class="shape">triangle</p>
             </div>
-            <div class="shape-card">
+            <div class="shape-card" onclick="AreaCircle(a)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                 </svg>
-                <p class="shape">Circle</p>
+                <p class="shape">circle</p>
             </div>
-            <div class="shape-icons"></div>
-            <div class="shape-icons"></div>
-            <div class="shape-icons"></div>
+            <div class="shape-card" onclick="AreaRectangle(a,b)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                    <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                    <path d="M160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160C96 124.7 124.7 96 160 96z"/>
+                </svg>
+                <p class="shape">rectangle</p>
+            </div>
         </div>
-         <p id="demo"></p>
+       <p id="demo">eee</p>
     </main>
    
    

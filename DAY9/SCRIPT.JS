@@ -11,7 +11,7 @@
         }else if(option == 'rectangle'){
             result = AreaRectangle(a,b);
         }else if(option == 'circle'){
-            result = AreaTrapezium(a);
+            result = AreaCircle(a);
         }else{
             console.log("Invalid option");
         }

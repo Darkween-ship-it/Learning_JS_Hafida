@@ -1,0 +1,12 @@
+:root{
+    --Dark-cocoa:#18181b;/*background*/
+    --Soft-Charcoal:#27272a;/*card/container*/
+    --Warm-Amber:#f59e0b;/*primary colours*/
+    --Cream-white:#fafafa;/*text*/
+}
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
