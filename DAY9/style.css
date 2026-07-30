@@ -21,7 +21,52 @@ body{
 }
 
 .shape-icon{
-    width:50px;
-    height: 50px;
+    width:60px;
+    height: 60px;
     fill:var(--Warm-Amber);
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+    margin-left: 3rem;
 }
+
+h1{
+    font-size:2.8rem;
+    text-shadow:2px 2px 2px #000 ;
+    align-items: center;
+    justify-content: center;
+    margin: 9rem 5rem 2rem 10rem;
+}
+
+.hero-p{
+    align-items: center;
+    justify-content: center;
+    margin:2rem 4rem 2rem 30rem ;
+}
+
+.shape-icons{
+    display:flex;
+    gap: 10rem;
+    margin-left: 10rem;
+    margin-top: 7rem;
+    margin-right: 5rem;
+
+}
+
+.shape-card{
+    background:var(--Soft-Charcoal);
+    border-radius: 16px;
+    border:1px solid #334155;
+    width: 400px;
+    height: 150px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.shape{
+    align-items: center;
+    justify-content: center;
+    margin-left:2.2rem;   
+    margin-top: 2rem;
+    text-decoration: none;
+}
+

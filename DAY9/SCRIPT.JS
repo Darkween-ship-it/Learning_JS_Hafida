@@ -1,5 +1,5 @@
 
-        let a=8;
+        let a=document.getElementById('valuea');
         let b=6;
         let h=2;
         let option='square';

@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shape Area Calculator</title>
-    <script src="SCRIPT.JS" defer></script>
+    <script src="SCRPT.JS" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>  
         <h1>WELCOME TO YOUR SHAPE AREA CALCULATOR</h1>
-        <P>Choose from the list of shapes below to calculate its shape</P>
+        <P class="hero-p">Choose from the list of shapes below to calculate its shape</P>
         <div class="shape-icons">
-            <div class="shape-card" onclick="AreaSquare(a)">
+            <div class="shape-card" >
                 <svg class="shape-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                     <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                     <path d="M160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160C96 124.7 124.7 96 160 96z"/>
                 </svg>
-                <p class="shape">square</p>
+                <a href="square.html" class="shape">square</a>
             </div>
             <div class="shape-card" onclick="AreaTriangle(b,h)">
                     <svg class="shape-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-triangle-fill" viewBox="0 0 16 16">
@@ -41,7 +41,7 @@
                 <p class="shape">rectangle</p>
             </div>
         </div>
-       <p id="demo">eee</p>
+       <p id="demo"></p>
     </main> 
 </body>
 </html>
