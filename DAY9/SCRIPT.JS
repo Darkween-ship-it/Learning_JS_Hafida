@@ -10,8 +10,8 @@
             result = AreaTriangle(b,h);
         }else if(option == 'rectangle'){
             result = AreaRectangle(a,b);
-        }else if(option == 'trapezium'){
-            result = AreaTrapezium(a,b,h);
+        }else if(option == 'circle'){
+            result = AreaTrapezium(a);
         }else{
             console.log("Invalid option");
         }
@@ -26,8 +26,8 @@
         function AreaRectangle(lenght,width){
             return lenght*width;
         }
-        function AreaTrapezium(base1,base2,height){
-            return((base1 + base2) / 2)*height;
+        function AreaCircle(radius){
+            return (22/7)*radius*radius;
         }
 
         console.log("Calculated Area:",result);
