@@ -7,12 +7,28 @@
 </head>
 <body>
     
-
+    <p id="demo"></p>
 
 
 
     <script>
-        
+        let a=8;
+        let b=6;
+        let h=2;
+        let option;
+        let result;
+        if(option == 'square'){
+            result = AreaSquare(a);
+        }else if(option == 'triangle'){
+            result = AreaTriangle(b,h);
+        }else if(option == 'rectangle'){
+            result = AreaRectangle(a,b);
+        }else if(option == 'trapezium'){
+            result = AreaTrapezium(a,b,h);
+        }else{
+            console.log("Invalid option");
+        }
+
     </script>
 
 </body>
