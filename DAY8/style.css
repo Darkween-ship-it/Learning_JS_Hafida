@@ -50,3 +50,10 @@ input{
     width: 500px;
     height: 2rem;
 }
+
+button{
+    height :2rem;
+    width:200px;
+    background-color: black;
+    color:red;
+}
