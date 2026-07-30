@@ -5,8 +5,8 @@
 }
 
 body{
-    background:white
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background:white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     align-items: center;
     justify-content: center;
     padding: 30px;
@@ -35,21 +35,18 @@ p{
 }
 
 div{
-    background:black;
-    border: 1px solid black;
     border-radius: 16px;
     align-items: center;
     justify-content: center;
     height:60px;
-    padding: 1rem 5rem;
     display: flex;
     flex-direction: space-between;
     gap: 16px;
 }
 
 input{
-    background: white
-    border-radius: 15px;
-    width: 200px;
+    background: white;
+    border-radius: 10px;
+    width: 500px;
     height: 2rem;
 }
