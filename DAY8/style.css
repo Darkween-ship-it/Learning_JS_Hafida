@@ -60,5 +60,7 @@ button{
 }
 
 #response{
+    align-items: center;
+    justify-content: center;
     
 }
