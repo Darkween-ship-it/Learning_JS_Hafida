@@ -9,4 +9,13 @@
     padding:0;
     margin:0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background: var(--Dark-cocoa);
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: var(--Cream-white);
 }
