@@ -6,31 +6,7 @@
     <title>square</title>
     <link rel="stylesheet" href="syle.css">
     <script src="SCRIPT.JS" defer></script>
-    <style>
-        *{
-            padding:0;
-            margin:0;
-            box-sizing: border-box;
-        }
-        
-        body{
-            background-color: #1e1e1e;
-            color:#fdfbf7;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .calculator-container{
-            display:flex;
-            width:90%;
-            max-width:10000px;
-            height:80vh;
-            gap:2rem;
-            align-items: center;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="shape.css"
 </head>
 <body>
     <div class="calculator-container">
@@ -40,7 +16,7 @@
                 <path d="M160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160C96 124.7 124.7 96 160 96z"/>
             </svg>
             <p>Enter the side of your square</p>
-            <input type="number" name="input" id="valuea" autofocus>
+            <input class="input-label" type="number" name="input" id="valuea" autofocus>
             <button type="button"  onclick="calculateSquare()">submit</button>
         </div>
         <div class="ans">
