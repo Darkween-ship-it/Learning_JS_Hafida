@@ -18,7 +18,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     color: var(--Cream-white);
-    margin: 9rem 5rem 2rem 10rem;
+    margin: 9rem 5rem 1rem 10rem;
 }
 
 .shape-icon{
@@ -47,15 +47,16 @@ h1{
 
 .shape-icons{
     display:grid;
-    gap: 2.5rem;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 2rem;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
 }
 
 .shape-card{
     background:var(--Soft-Charcoal);
     border-radius: 16px;
     border:1px solid #334155;
-    width: 300px;
+    width: 200px;
     height: 150px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
@@ -63,8 +64,7 @@ h1{
 .shape{
     align-items: center;
     justify-content: center;
-    margin-left:2.2rem;   
-    margin-top: 2rem;
+    color: var(--Cream-white);
     text-decoration: none;
 }
 
