@@ -1,24 +1,8 @@
 
-        let a=document.getElementById('valuea');
-        let b=6;
-        let h=2;
-        let option='square';
-        let result;
-        if(option == 'square'){
-            result = AreaSquare(a);
-        }else if(option == 'triangle'){
-            result = AreaTriangle(b,h);
-        }else if(option == 'rectangle'){
-            result = AreaRectangle(a,b);
-        }else if(option == 'circle'){
-            result = AreaCircle(a);
-        }else{
-            console.log("Invalid option");
-        }
-        //creating the fxns//
 
-        function AreaSquare(side){
-            return side*side;
+         function AreaSquare(side){
+            result = side*side;
+            return result;
         }
         function AreaTriangle(base,height){
             return 0.5*base*height;
@@ -29,6 +13,39 @@
         function AreaCircle(radius){
             return (22/7)*radius*radius;
         }
+        
 
-        console.log("Calculated Area:",result);
-        document.getElementById('demo').innerText = "Result:" + result;
+        //variables of each fxn//
+        function calculateSquare(){
+            let a = parseFloat(document.getElementById('valuea').value);
+            if(isNaN(a))return showResult("Pleae enter a vaild number");
+
+            showResult("Result:"+AreaSquare(a));
+        }
+
+        function calculateTriangle(){
+            let b = parseFloat(document.getElementById('valueb').value);
+            let h = parseFloat(document.getElementById('valueh').value);
+            if(isNaN(b) || isNaN(h)) return showResult("Pleae enter a vaild number");
+
+            showResult("Result:"+AreaTriangle(b,h));
+        }
+
+        function calculateRectangle(){
+            let l = parseFloat(document.getElementById('valuel').value);
+            let w = parseFloat(document.getElementById('valuew').value);
+            if(isNaN(l) || isNaN(w)) return showResult("Pleae enter a vaild number");
+
+            showResult("Result:"+AreaRectangle(l,w));
+        }
+
+        function calculateCircle(){
+            let r = parseFloat(document.getElementById('valuer').value);
+            if(isNaN(r)) return showResult("Pleae enter a vaild number");
+
+            showResult("Result:"+AreaCircle(r));
+        }
+
+        function showResult(message){
+            document.getElementById('demo').innerText = message;
+        }
