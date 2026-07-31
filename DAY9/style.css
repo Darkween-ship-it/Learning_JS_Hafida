@@ -27,8 +27,8 @@ body{
     fill:var(--Warm-Amber);
     align-items: center;
     justify-content: center;
-    margin-top: 1.5rem;
-    margin-left: 3rem;
+    margin-top: 2rem;
+    margin-left: 4.5rem;
 }
 
 h1{
@@ -66,5 +66,11 @@ h1{
     justify-content: center;
     color: var(--Cream-white);
     text-decoration: none;
+    margin:4rem 1rem 1rem 4.5rem;
 }
 
+.ans{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border: 1px solid pink;
+}
