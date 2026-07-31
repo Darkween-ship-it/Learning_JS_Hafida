@@ -6,12 +6,14 @@
     <title>square</title>
     <link rel="stylesheet" href="style.css">
     <script src="SCRIPT.JS" defer></script>
+    <link rel="stylesheet" href="shape.css">
 </head>
 <body>
-    <div class="in">
+    <main>
+        <div class="in">
         <svg class="shape-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
             <!--!Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-            <path d="M160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160C96 124.7 124.7 96 160 96z"/>
+            <rect x="90" y="210" width="700" height="500" rx="24" ry="24" fill="#f59e0b"/>
         </svg>
         <p>Enter the lenght of your rectangle</p>
         <input type="number" name="input" id="valuel" autofocus>
@@ -19,11 +21,13 @@
         <input type="number" name="input" id="valuew" autofocus>
 
         <button type="button"  onclick="calculateRectangle()">submit</button>
-    </div>
-    <div class="ans">
-        <h3>Area of Rectangle</h3>
-        <p id="demo"></p>
-    </div>
+        </div>
+            <p id="demo"></p>
+    </main>
+     <a href="index.html" style="color:#f59e0b;
+    padding-left: 17px;
+    margin-top: 500px;">Return to menu</a>
+    
    
 </body>
 </html>

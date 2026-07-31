@@ -1,6 +1,6 @@
 
 
-         function AreaSquare(side){
+        function AreaSquare(side){
             result = side*side;
             return result;
         }
