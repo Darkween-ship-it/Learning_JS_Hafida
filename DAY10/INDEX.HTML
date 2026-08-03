@@ -8,19 +8,20 @@
 <body>
     <p id="demo"></p>
     <script>
-        let cart = ["banana","apple","pear"];
-        alert("Welcome to the shopping cart");
-        let option = prompt("choose the options you wish to perform");
-        alert("1.add item \n 2.view the cart\n 3.remove item\n 4.chckout and see th total\n");
-        if (option == 1){
-            cart.push("orange");
-        }
-        if (option == 2){
-            alert(cart);
-        }
-        
-        if(option == 3){
-            cart.pop();
+        while(true){
+            let cart = ["banana","apple","pear"];
+            alert("Welcome to the shopping cart");
+            alert("1.add item \n 2.view the cart\n 3.remove item\n 4.chckout and see th total\n");
+            let option = prompt("choose the options you wish to perform");
+            if (option == 1){
+                cart.push("orange");
+            }
+            if (option == 2){
+                alert(cart);
+            }
+            if(option == 3){
+                cart.pop();
+            }
         }
     </script>
 </body>
