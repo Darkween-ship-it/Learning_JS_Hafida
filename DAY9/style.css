@@ -74,3 +74,78 @@ h1{
     border-bottom-left-radius: 50px;
     border: 1px solid pink;
 }
+
+@media (max-width:1500px){
+    h1{
+    font-size:2rem;
+    text-shadow:2px 2px 2px #000 ;
+    align-items: center;
+    justify-content: center;
+    
+    }
+
+    .hero-p{
+    align-items: center;
+    justify-content: center;
+    margin:2rem 3rem 1rem 15rem ;
+    }
+}
+
+@media (max-width:1000px){
+     h1{
+    font-size:1.5rem;
+    text-shadow:2px 2px 2px #000 ;
+    align-items: center;
+    justify-content: center;
+    
+    }
+
+    .hero-p{
+    align-items: center;
+    justify-content: center;
+    margin:2rem 3rem 1rem 10rem ;
+    }
+}
+
+@media (max-width:800px){
+     h1{
+    font-size:14px;
+    text-shadow:2px 2px 2px #000 ;
+    align-items: center;
+    justify-content: center;
+    
+    }
+
+    .hero-p{
+    align-items: center;
+    justify-content: center;
+    margin:2rem 3rem 1rem 4rem ;
+    font-size: 10px;
+    }
+}
+
+@media (max-width:500px){
+     h1{
+    font-size:10px;
+    text-shadow:2px 2px 2px #000 ;
+    align-items: center;
+    justify-content: center;
+    
+    }
+
+    .hero-p{
+    align-items: center;
+    justify-content: center;
+    margin:2rem 3rem 1rem 1rem ;
+    }
+
+    body{
+    background: var(--Dark-cocoa);
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: var(--Cream-white);
+    margin: 7rem 3rem 1rem 7rem;
+    }
+    
+}
