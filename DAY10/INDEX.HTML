@@ -9,12 +9,19 @@
     <p id="demo"></p>
     <script>
         let cart = ["banana","apple","pear"];
+        alert("Welcome to the shopping cart");
         let option = prompt("choose the options you wish to perform");
+        alert("1.add item \n 2.view the cart\n 3.remove item\n 4.chckout and see th total\n");
         if (option == 1){
             cart.push("orange");
         }
-
-        document.getElementById('demo').innerText = cart;
+        if (option == 2){
+            alert(cart);
+        }
+        
+        if(option == 3){
+            cart.pop();
+        }
     </script>
 </body>
 </html>
