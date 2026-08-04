@@ -113,7 +113,7 @@ header{
 .cart {
     position: fixed;
     top: 0;
-    right: 0;
+    right: -100px;
     width: 360px;
     height: 100%;
     background: #fff;
@@ -224,5 +224,13 @@ header{
     font-size:16px;
     color:#fff;
     margin:20px auto 0;
+    cursor:pointer;
+}
+
+#cart-close{
+    position:absolute;
+    top:20px;
+    right:15px;
+    font-size:35px;
     cursor:pointer;
 }
