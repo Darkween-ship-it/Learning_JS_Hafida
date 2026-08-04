@@ -17,6 +17,14 @@ const addToCart = productBox => {
     const productTitle = productBox.querySelector(".product-title").textContent;
     const productPrice = productBox.querySelector(".price").textContent;
 
+    const cartItems = cartContent.querySelectorAll(".cart-product-title");
+    for (let item of cartItems) {
+        if (item.textContent === productTitle) {
+            alert("This item is already added to the cart");
+            return;
+        }
+    }
+
     const cartBox = document.createElement("div");
     cartBox.classList.add("cart-box");
     cartBox.innerHTML = `
