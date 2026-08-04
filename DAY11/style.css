@@ -151,3 +151,47 @@ header{
     font-size:18px;
     line-height:1;
 }
+
+.cart-detail{
+    display: grid;
+    gap:8px;
+    margin-right:auto;
+}
+
+.cart-product-title{
+    font-size:16px;
+    line-height: 1;
+}
+
+.cart-price{
+    font-weight: 500;
+}
+
+.cart-quantity{
+    display:flex;
+    width:100px;
+    border:1px solid #999;
+    border-radius:6px;
+}
+
+.cart-quantity button{
+    background:transparent;
+    width:30px;
+    border:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.cart-quantity .number{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:40px;
+    border-left:1px solid #999;
+    border-right:1px solid #999;
+    cursor:default;
+}
+
+.cart-quantity #decrement{
+    color:#999;
+}
