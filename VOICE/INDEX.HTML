@@ -44,7 +44,7 @@
             recognition.maxAlternatives = 1;
             recognition.onresult = (event)=>{
                 const transcript = event.results[0][0].transcript.toLowerCase().trim();
-                resultDiv.textContent = 'you said: "${transcript}"';
+                resultDiv.textContent = `you said: "${transcript}"`;
 
                 //voice commands
                 if (transcript.includes("change background")){

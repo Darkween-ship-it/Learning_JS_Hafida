@@ -118,7 +118,7 @@ header{
 .mobile-menu{
     display:none;
     height:40px;
-    line-height:
+    line-height:40px;
 }
 .mobile-menu ul{
     justify-content: center;
