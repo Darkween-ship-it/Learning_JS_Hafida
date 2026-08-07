@@ -1,0 +1,148 @@
+@import url(https://fonts.google.com/specimen/Roboto);
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Roboto' ,sans-serif;
+    font-weight: 400 700;
+}
+
+body{
+    background:hsl(235, 18%, 26%);
+}
+
+.container{
+    background-color: hsl(0, 0%, 100%);
+    border-radius:20px;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height:500px;
+    margin:1rem  3rem 1rem  15rem;
+    display:flex;
+    padding: 0;
+}
+
+img{
+    height: 480px;
+    margin:1rem 1rem;
+    width: auto;
+}
+
+.img-container{
+    margin-right: 0;
+}
+
+h1{
+    color:hsl(234, 29%, 20%);
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+.subscribe-box{
+    height:460px;  
+    margin-right: 2rem;
+    margin-left: 3rem;
+    margin-top: 0;
+}
+
+p{
+    color:hsl(235, 18%, 26%);
+}
+
+#intro{
+    padding:1rem;
+}
+
+.checklist{
+    display:flex;
+    gap:1rem;
+    padding:0.5rem;
+}
+
+h6{
+    padding:2rem 2rem 1rem 1rem;
+}
+
+input{
+    border-radius: 2px;
+    border:1px solid hsl(0, 0%,58%);
+    height:2.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+input:focus{
+    border:1px solid hsl(234, 29%, 20%);
+}
+
+
+.btn{
+    display:flex;
+    flex-direction: column;
+    gap:0.5rem;
+    height: 5rem;
+}
+
+button{
+    height:2.5rem;
+    width:auto;
+    background-color:hsl(234, 29%, 20%) ;
+    border:1px solid hsl(0, 0%,58%);
+    border-radius: 3px;
+    color:hsl(0, 0%, 100%);
+}
+
+button:hover{
+    background-color: hsl(4, 100%, 67%);
+    border:1px solid hsl(4, 100%, 67%);
+}
+
+@media (max-width:1300px){
+    .subscribe-box{
+    height:490px;  
+    margin-right: 0;
+    margin-left: 2rem;
+    margin-top: 0;
+    }
+
+    h1{
+    color:hsl(234, 29%, 20%);
+    font-size: 1rem;
+    }
+
+    img{
+        height: 480px;
+        margin:1rem 1rem;
+        width: auto;
+    }
+
+    .checklist{
+        display:flex;
+        gap:1rem;
+        padding:0.1rem;
+    }
+
+    h6{
+    padding:1rem ;
+}
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;           /* span the whole phone */
+        height: auto;          /* stop forcing 500px */
+        margin: 0;             /* remove the 15rem margin */
+        border-radius: 0;      /* full-bleed look */
+        flex-direction: column; /* stack image on top of form */
+    }
+
+    .img-container {
+        /* nothing fancy yet - the image will overflow, that's ok for now */
+    }
+
+    img {
+        width: 100%;           /* image fills the width */
+        height: auto;          /* let it shrink, drop the 480px */
+    }
+}
