@@ -5,12 +5,12 @@
 }
 
 body{
-    background-color: #121212;
+    background-color: #0f172a;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     align-items: center;
     justify-content: center;
     padding: 30px;
-    color: #0f0f0f;
+    color: #f8fafc;
     display: flex;
     min-height: 100vh;
 }
@@ -21,22 +21,24 @@ main{
     max-width: 380px;
     text-align: center;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: #1e293b;
     padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(220,38,38,0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    border:1px solid rgba(255,255,255,0.08);
 
 }
 
 h1{
     margin-bottom: 0.5rem;
-    color: #0f0f0f;
+    color: #ffffff;
     font-size: 0.95rem;
 }
 
 p{
     margin-bottom: 1rem;
-    margin-left: 4rem;
+    color:#94a3b8;
+    font-size: 0.95;
 }
 
 div{
@@ -47,19 +49,19 @@ div{
 }
 
 input{
-    background: #ffffff;
-    color:#0f0f0f;
+    background: #0f172a;
+    color:#ffffff;
     outline: none;
     text-align: center;
     transition:border-color 0.2s ease;
     border-radius: 8px;
-    border:2px solid #121212;
+    border:2px solid #334155;
     padding: 0.8rem 1rem;
     font-size: 1.1rem;
 }
 
 input:focus{
-    border-color: #dc2626;
+    border-color: #6366f1;
 }
 button{
     padding: 0.8rem 1rem;
@@ -68,13 +70,13 @@ button{
     border: none;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.1s ease;
-    background:#dc2626
+    background:#6366f1;
     color:#ffffff;
     border-radius: 8px;
 }
 
 button:hover{
-    background: #b91c1c;
+    background:#4f46e5;
 }
 
 button:active{
@@ -86,6 +88,5 @@ button:active{
    font-size: 1.05rem;
    font-weight: 700;
    margin-top: 1rem;
-   color: #dc2626;
 
 }

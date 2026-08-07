@@ -1,5 +1,4 @@
 
-
         function AreaSquare(side){
             result = side*side;
             return result;
@@ -18,7 +17,7 @@
         //variables of each fxn//
         function calculateSquare(){
             let a = parseFloat(document.getElementById('valuea').value);
-            if(isNaN(a))return showResult("Pleae enter a vaild number");
+            if(isNaN(a))return showResult("Please enter a valid number");
 
             showResult("Result:"+AreaSquare(a));
         }

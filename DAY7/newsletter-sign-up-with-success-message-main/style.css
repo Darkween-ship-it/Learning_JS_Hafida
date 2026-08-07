@@ -137,10 +137,7 @@ button:hover{
         flex-direction: column; /* stack image on top of form */
     }
 
-    .img-container {
-        /* nothing fancy yet - the image will overflow, that's ok for now */
-    }
-
+    
     img {
         width: 100%;           /* image fills the width */
         height: auto;          /* let it shrink, drop the 480px */

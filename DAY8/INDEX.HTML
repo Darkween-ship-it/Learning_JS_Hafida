@@ -28,11 +28,21 @@
             let userGuess = Number(inputElement.value);
 
                  if(userGuess > guess){
-                     response.innerHTML="Too high"; 
+                    if(userGuess > 10){
+                        response.innerHTML="Out of range";
+                    }else{
+                        response.innerHTML="Too high"; 
+                    }
                  }else if(userGuess < guess){
-                     response.innerHTML="Too low";
-                 }else{
+                    if(userGuess < 0){
+                        response.innerHTML="Out of range";
+                    }else{
+                        response.innerHTML="Too low";
+                    }
+                 }
+                 else{
                      response.innerHTML="Congratulations you've found the number";
+                      document.body.p.style.color = "green";
                  }
            }
     </script>

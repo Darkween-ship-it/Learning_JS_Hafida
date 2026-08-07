@@ -10,12 +10,9 @@
         <button type="button" onclick="myFunction()">Try it</button>
 
          <script> window.alert(5+7);
-            let age=19;
-            let text="you can't drive"
-
-            if(age>=18){
-                text="you can drive";
-            }
+            let age=15;
+            let text= (age<18) ? "minor" :"adult" ;
+           
             document.getElementById("demo").innerHTML=text;
          </script>
     </body>
