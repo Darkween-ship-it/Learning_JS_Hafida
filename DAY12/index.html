@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdressBook</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+    <div id="fullsreen-div"></div>
+    <form class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-head">
+                <h3 id="modal-title">Add Adress</h3>
+                <button type="button" id="close-btn">
+                    <i class="fas fa-items"></i>
+                </button>
+            </div>
+            <div class="modal-main">
+                <div class="modal-row">
+                    <div class="modal-col">
+                        <label for="">How should your mail be adressed?</label>
+                        <input type="text" placeholder="E.g. The Tchiegmou Family" class="form-control" name="addr_ing_name">
+                    </div>
+                </div>
+
+                <div class="modal-row grid-row">
+                    <div class="modal-col">
+                        <label for="">First Name</label>
+                        <input type="text" placeholder="E.g. The first name" class="form-control" name="first_name">
+                    </div>
+                    <div class="modal-col">
+                        <label for="">Last Name</label>
+                        <input type="text" placeholder="The last Name" class="form-control" name="Last_name">
+                    </div>
+                </div>
+
+                <div class="modal-row grid-row">
+                    <div class="modal-col">
+                        <label for="">Email</label>
+                        <input type="email" placeholder="The email" class="form-control" name="email">
+                    </div>
+                    <div class="modal-col">
+                        <label for="">Phone</label>
+                        <input type="text" placeholder="The Phone" class="form-control" name="phone">
+                    </div>
+                </div>
+
+                <div class="modal-row grid-row">
+                    <div class="modal-col">
+                        <label for="">Street address</label>
+                        <input type="text" placeholder="Street address, apartment, house number, etc." class="form-control" name="street_addr">
+                    </div>
+                    <div class="modal-col">
+                        <label for="">Postal code</label>
+                        <input type="text" placeholder="60323" class="form-control" name="ostal code">
+                    </div>
+                </div>
+
+                <div class="modal-row grid-row">
+                    <div class="modal-col">
+                        <label for="">City</label>
+                        <input type="email" placeholder="City name" class="form-control" name="city">
+                    </div>
+                    <div class="modal-col">
+                        <label for="">Country</label>
+                        <select id="country-list" name="country">
+                            <option>USA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-row">
+                    <div class="modal-col">
+                        <label for="">Labels</label>
+                        <select name="label">
+                            <option value="Family">Family</option>
+                            <option value="Friends">Friends</option>
+                            <option value="Colleagues">Colleagues</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </form>
+</body>
+</html>
