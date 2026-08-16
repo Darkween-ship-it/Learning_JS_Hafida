@@ -14,7 +14,51 @@ let bird_dy = 0;
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
+const MODEL_URL = './model/';
+let recognizer;
+let clap_idx = -1;
 let last_flap_time = 0;
+
+const debugBox = document.createElement('div');
+debugBox.style.cssText = 'position:fixed;bottom:10px;left:10px;z-index:1000;background:rgba(0,0,0,0.7);color:#0f0;font:14px monospace;padding:8px;border-radius:4px;';
+document.body.appendChild(debugBox);
+
+async function initAudioModel(){
+    try {
+        recognizer = speechCommands.create(
+            "BROWSER_FFT",
+            undefined,
+            MODEL_URL + "model.json",
+            MODEL_URL + "metadata.json"
+        );
+        await recognizer.ensureModelLoaded();
+        clap_idx = recognizer.wordLabels().indexOf('Clap');
+        debugBox.textContent = 'model ready - press Enter';
+        console.log('model loaded:', recognizer.wordLabels());
+    } catch (err) {
+        debugBox.textContent = 'model error - check console';
+        console.log('model error:', err);
+    }
+}
+
+function startListening(){
+    if (!recognizer) return;
+    recognizer.listen((result) => {
+        let clap = result.scores[clap_idx];
+        debugBox.textContent = 'Clap ' + clap.toFixed(2);
+        if (clap > 0.8 && Date.now() - last_flap_time > 350) {
+            console.log('clap!');
+            flap();
+            last_flap_time = Date.now();
+        }
+    }, {
+        overlapFactor: 0.75,
+        invokeCallbackOnNoiseAndUnknown: true,
+        probabilityThreshold: 0
+    });
+}
+
+initAudioModel();
 
 function flap(){
     if(game_state != 'Play') return;
@@ -41,9 +85,7 @@ document.addEventListener('keydown',(e) =>{
         score_title.innerHTML = 'Score:';
         score_val.innerHTML = '0';
         message.classList.remove('messageStyle');
-        if (rec && !rec_running) {
-            rec.start();
-        }
+        startListening();
         play();
     }
 });
@@ -124,37 +166,4 @@ function play(){
         requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
-}
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-let rec;
-let rec_running = false;
-
-if (SpeechRecognition) {
-    rec = new SpeechRecognition();
-    rec.continuous = true;
-    rec.interimResults = true;
-    rec.lang = 'en-US';
-
-    rec.onstart = () => rec_running = true;
-
-    rec.onresult = (event) => {
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            let transcript = event.results[i][0].transcript.toLowerCase();
-            if (transcript.includes('up') && Date.now() - last_flap_time > 300) {
-                flap();
-                last_flap_time = Date.now();
-            }
-        }
-    };
-
-    rec.onend = () => {
-        rec_running = false;
-        if (game_state == 'Play') {
-            rec.start();
-        }
-    };
-} else {
-    console.log('SpeechRecognition not supported (use Chrome)');
 }
