@@ -14,7 +14,7 @@ let bird_dy = 0;
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-const MODEL_URL = './model/';
+const MODEL_URL = 'https://teachablemachine.withgoogle.com/models/p8B-aV2BM/';
 let recognizer;
 let clap_idx = -1;
 let last_flap_time = 0;
