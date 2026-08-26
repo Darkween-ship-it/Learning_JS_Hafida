@@ -217,10 +217,13 @@ body {
     grid-column: span 2;
 }
 
-.discover .disc-cont:nth-child(n+4) {
+.discover .disc-cont:nth-child(n+4):nth-child(-n+5) {
     grid-column: span 3;
 }
 
+.discover .disc-cont:nth-child(n+6){
+    grid-column:span 2;
+}
 .disc-cont {
     background: var(--white);
     border-radius: 12px;
@@ -251,11 +254,19 @@ body {
     font-size: 0.95rem;
 }
 
+/* ─── MAIN LAYOUT (posts + right sidebar) ─── */
+.main-layout {
+    display: flex;
+    gap: 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px 80px;
+}
+
 /* ─── POSTS SECTION ─── */
 .posts-section {
-    padding: 80px 50px;
-    max-width: 1200px;
-    margin: 0 auto;
+    flex: 1;
+    min-width: 0;
 }
 
 .section-header {
@@ -382,6 +393,235 @@ body {
     transform: scale(1.05);
 }
 
+/* ─── RIGHT SIDEBAR ─── */
+.right-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    padding-top: 20px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.rs-widget {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.rs-widget h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--amber-light);
+}
+
+/* Trending Topics */
+.trending-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trending-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trend-tag {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.trend-tag:hover {
+    color: var(--amber);
+}
+
+.trend-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* People to Follow */
+.follow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.follow-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.follow-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--amber-light);
+    color: var(--amber);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.follow-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.follow-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.follow-role {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.follow-btn {
+    padding: 5px 16px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1.5px solid var(--amber);
+    background: transparent;
+    color: var(--amber);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.follow-btn:hover {
+    background: var(--amber);
+    color: var(--white);
+}
+
+/* Newsletter */
+.newsletter-widget {
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--brown-mid) 100%);
+    color: var(--white);
+}
+
+.newsletter-widget h4 {
+    color: var(--white);
+    border-bottom-color: rgba(245, 158, 11, 0.3);
+}
+
+.newsletter-icon {
+    font-size: 1.8rem;
+    color: var(--amber);
+    margin-bottom: 12px;
+}
+
+.newsletter-widget p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 0.85rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.25s ease;
+}
+
+.newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-form input:focus {
+    border-color: var(--amber);
+}
+
+.newsletter-form button {
+    padding: 10px;
+    background: var(--amber);
+    color: var(--charcoal);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+
+.newsletter-form button:hover {
+    opacity: 0.85;
+}
+
+/* Reading List */
+.reading-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.reading-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.reading-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.rl-title {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1.4;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rl-title:hover {
+    color: var(--amber);
+}
+
+.rl-meta {
+    font-size: 0.73rem;
+    color: var(--text-muted);
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
     .sidebar {
@@ -442,7 +682,26 @@ body {
     }
 
     .posts-section {
-        padding: 50px 20px;
+        padding: 0;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        padding: 0 20px 50px;
+        gap: 30px;
+    }
+
+    .right-sidebar {
+        width: 100%;
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .rs-widget {
+        flex: 1;
+        min-width: 260px;
     }
 
     .posts-grid {
