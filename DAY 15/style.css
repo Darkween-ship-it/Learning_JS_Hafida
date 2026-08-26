@@ -209,20 +209,23 @@ body {
     background: var(--sand);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(180px, auto);
+    grid-auto-rows: minmax(140px, auto);
     gap: 20px;
 }
 
 .discover .disc-cont:nth-child(-n+3) {
     grid-column: span 2;
+    animation-delay:0.2s;
 }
 
 .discover .disc-cont:nth-child(n+4):nth-child(-n+5) {
     grid-column: span 3;
+    animation-delay: 0.4s;
 }
 
 .discover .disc-cont:nth-child(n+6){
     grid-column:span 2;
+    animation-delay: 0.7s;
 }
 .disc-cont {
     background: var(--white);
@@ -231,6 +234,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     border-left: 4px solid var(--gold);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .disc-cont:hover {
@@ -252,6 +256,17 @@ body {
     color: var(--text-muted);
     line-height: 1rem;
     font-size: 0.95rem;
+}
+
+@keyframes slideUp{
+    from {
+        opacity:0;
+        transform:translateY(0);
+    }
+    to{
+        opacity:1;
+        transform:translateY(30px);
+    }
 }
 
 /* ─── MAIN LAYOUT (posts + right sidebar) ─── */
