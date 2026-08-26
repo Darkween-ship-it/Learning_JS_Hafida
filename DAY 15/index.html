@@ -4,69 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post using REst API fetch</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    
-     <header class="sidebar">
+
+    <aside class="sidebar">
         <a href="#" class="logo">Le Continent.</a>
 
         <nav class="navbar">
-            <a href="#" class="active">Home</a>
-            <a href="#feed">feed</a>
-            <a href="#theme">theme</a>
-            <a href="#Signin">Sign in</a>
+            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#feed"><i class="fas fa-rss"></i> Feed</a>
+            <a href="#theme"><i class="fas fa-palette"></i> Theme</a>
+            <a href="#Signin"><i class="fas fa-user"></i> Sign in</a>
         </nav>
-    </header>
 
-    <section class="hero-content">
-        <h1  class="hero-title" > I'm Black. I'm Beauty</h1>
-        <h1 class="hero-title"> I am AFRICA</h1>
+        <div class="sidebar-footer">
+            <p>&copy; 2026 Le Continent.</p>
+        </div>
+    </aside>
 
-        <p>Where ancient roots meets mordern rythms. Uncovere the stories that define Agrican heritage.</p>
+    <div class="content">
+        <section class="hero-content">
+            <div class="many">
+                <h1 class="hero-title">I'm Black. I'm Beauty</h1>
+                <h1 class="hero-title">I am AFRICA</h1>
 
-        <a href="#Signin" class="cta-btn">let's Go </a>
+                <p>Where ancient roots meets modern rhythms. Uncover the stories that define African heritage.</p>
+                <a href="#Signin" class="cta-btn">Let's Go</a>
 
-        <div class="hero-img">
-            <img src="images/Black silhouette slim African girl illustration.jpg" alt="silhouette">
-        </div>
-    </section>
+            </div>
+            
+            <div class="hero-img">
+                <img src="images/Black silhouette slim African girl illustration.jpg" alt="silhouette">
+            </div>
+        </section>
 
-    <section class="discover">
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-        <div class="disc-cont">
-            <h6>Good</h6>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam! Reiciendis, saepe repellat.</p>
-        </div>
-    </section>
-        
-    <main>
-        <h1> Let's display all the rest API mock data here</h1>
-        <p id="demo"></p>
+        <section class="discover">
+            <div class="disc-cont">
+                <h6>Roots</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Culture</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Art</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Music</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Heritage</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Diaspora</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+            <div class="disc-cont">
+                <h6>Stories</h6>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut vero aliquam, qui itaque nihil tempore laborum explicabo voluptates voluptatum id odit sequi et totam, ipsum repudiandae ipsam!</p>
+            </div>
+        </section>
 
-    </main>
+        <main class="posts-section">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2>Featured Stories</h2>
+                <p>Explore the richness of African heritage through curated visuals and stories</p>
+                <div class="section-line"></div>
+            </div>
+            <div id="demo" class="posts-grid"></div>
+        </main>
+    </div>
+
+    <aside class="sidebar">
+        <a href="#" class="logo">Le Continent.</a>
+
+        <nav class="navbar">
+            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#feed"><i class="fas fa-rss"></i> Feed</a>
+            <a href="#theme"><i class="fas fa-palette"></i> Theme</a>
+            <a href="#Signin"><i class="fas fa-user"></i> Sign in</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>&copy; 2026 Le Continent.</p>
+        </div>
+    </aside>
     <script src="script.js"></script>
 </body>
 </html>
