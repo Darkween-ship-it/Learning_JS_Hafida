@@ -1,4 +1,4 @@
-const readline = recquire("readline");
+const readline = require("readline");
 
 const rl = readline.createInterface({
     input:ProcessingInstruction.stdin,
