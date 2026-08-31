@@ -1,8 +1,8 @@
 const readline = require("readline");
 
 const rl = readline.createInterface({
-    input:ProcessingInstruction.stdin,
-    output: ProcessingInstruction.stdout,
+    input: process.stdin,
+    output: process.stdout
 });
 
 rl.question("Enter your task:", (taskName) =>{
