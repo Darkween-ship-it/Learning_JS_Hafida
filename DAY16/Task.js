@@ -6,6 +6,14 @@ const rl = readline.createInterface({
 });
 
 rl.question("Enter your task:", (taskName) =>{
-    console.log(`your task is : ${taskName}`);
-    rl.close();
+    rl.question("Enter your priority:",(priority) =>{
+        rl.question('Enter your due date:',(duedate) =>{
+            console.log(`your task is : ${taskName}`);
+            console.log(`Priority:`,priority);
+            console.log(`DueDate:`, duedate);
+            rl.close();
+        })
+        
+    })
+    
 });
