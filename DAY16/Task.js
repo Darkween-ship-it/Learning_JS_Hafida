@@ -5,15 +5,24 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question("Enter your task:", (taskName) =>{
-    rl.question("Enter your priority:",(priority) =>{
-        rl.question('Enter your due date:',(duedate) =>{
-            console.log(`your task is : ${taskName}`);
-            console.log(`Priority:`,priority);
-            console.log(`DueDate:`, duedate);
-            rl.close();
-        })
+function addTask(){
+    rl.question("Enter your task:", (taskName) =>{
+        rl.question("Enter your priority:",(priority) =>{
+            rl.question('Enter your due date:',(duedate) =>{
+                const task = { 
+                    name: taskName,
+                    priority: Number(priority),  
+                    dueDate: duedate 
+                };
+
+                tasks.set(taskName, task); 
+                console.log("\nTask added successfully!"); 
+                console.log(task);
+            })
         
-    })
+        })
     
-});
+    });
+}
+
+const tasks = new Map();
