@@ -32,28 +32,28 @@ const projects = [
 const cardStyles = [
   // 01 - rounded top heavy + soft-aqua accent
   {
-    container: 'bg-beige hover:bg-white rounded-l-[48px] rounded-r-[20px] border-b-[3px] border-l-soft-aqua',
+    container: 'bg-beige hover:bg-white rounded-tl-[48px] rounded-bl-[20px] rounded-r-[20px] border-l-[3px] border-t-[3px] border-t-soft-aqua border-l-soft-aqua',
     number: 'text-soft-aqua group-hover:text-peacock',
     role: 'bg-deep-teal text-white',
     tag: 'bg-pastel-teal/50 text-deep-teal',
   },
   // 02 - rounded right heavy + sand tint on hover
   {
-    container: 'bg-beige hover:bg-white rounded-r-[48px] rounded-l-[20px] border-t-[3px] border-t-sand',
+    container: 'bg-beige hover:bg-white rounded-tr-[48px] rounded-br-[20px] rounded-l-[20px] border-t-[3px] border-r-[3px] border-t-sand border-r-sand',
     number: 'text-sand group-hover:text-cocoa',
     role: 'bg-cocoa text-white',
     tag: 'bg-sand/40 text-cocoa',
   },
   // 03 - rounded bottom heavy + peacock accent
   {
-    container: 'bg-beige hover:bg-white rounded-b-[48px] rounded-t-[20px] border-r-[3px] border-r-peacock',
+    container: 'bg-beige hover:bg-white rounded-tl-[20px] rounded-bl-[48px] rounded-r-[20px] border-l-[3px] border-b-[3px]  border-l-peacock border-b-peacock',
     number: 'text-peacock group-hover:text-ocean',
     role: 'bg-peacock text-white',
     tag: 'bg-peacock/10 text-peacock',
   },
   // 04 - rounded left heavy + olive/warm accent
   {
-    container: 'bg-beige hover:bg-white rounded-l-[48px] rounded-r-[20px] border-b-[3px] border-b-cocoa',
+    container: 'bg-beige hover:bg-white rounded-tr-[20px] rounded-br-[48px] rounded-l-[20px] border-r-[3px]  border-b-[3px]  border-b-cocoa, border-b-cocoa',
     number: 'text-cocoa group-hover:text-chocolate',
     role: 'bg-chocolate text-white',
     tag: 'bg-cocoa/15 text-chocolate',
@@ -66,7 +66,6 @@ export default function Projects() {
       <div className="max-w-[1100px] mx-auto px-[20px] md:px-[50px] lg:px-[80px]">
         <h2 className="font-serif text-[42px] md:text-[52px] text-espresso mb-16 leading-tight">
           Projects that show
-          <br />
           <span className="text-peacock italic">how I work.</span>
         </h2>
 
