@@ -2,23 +2,44 @@ export default function About() {
   return (
     <section id="about" className="bg-beige py-[100px] md:py-[120px]">
       <div className="max-w-[1100px] mx-auto px-[20px] md:px-[50px] lg:px-[80px]">
-        <h2 className="font-serif text-[42px] md:text-[52px] text-espresso mb-10 leading-tight">
-          A little
-          <br />
-          <span className="text-peacock italic">about me.</span>
-        </h2>
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-[40px] md:gap-[60px] mb-10">
+          {/* Heading */}
+          <h2 className="font-serif text-[42px] md:text-[52px] text-espresso leading-tight">
+            A little
+            <br />
+            <span className="text-peacock italic">about me.</span>
+          </h2>
 
-         {/* Hiking image - irregular blob shape */}
-            <div className="group w-full max-w-[250px]">
-              <img
-                src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
-                alt="Hiking in the mist"
-                className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{
-                  borderRadius: '30% 0% 55% 45% / 60% 40% 60% 40%',
-                }}
-              />
-            </div>
+          <div className="group w-[250px] h-[250px] shrink-0">
+            <svg className="w-full h-full block">
+              <defs>
+                <clipPath id="boneClip" clipPathUnits="objectBoundingBox">
+                  <path d="
+                    M 0.5 0.02
+                    C 0.62 0, 0.72 0.08, 0.68 0.22
+                    C 0.86 0.16, 0.98 0.3, 0.94 0.46
+                    C 0.98 0.5, 0.98 0.56, 0.9 0.58
+                    C 0.92 0.74, 0.8 0.86, 0.66 0.78
+                    C 0.62 0.9, 0.55 0.99, 0.45 0.95
+                    C 0.4 0.99, 0.34 0.94, 0.38 0.82
+                    C 0.24 0.88, 0.1 0.76, 0.16 0.6
+                    C 0.06 0.58, 0.05 0.5, 0.12 0.46
+                    C 0.1 0.32, 0.2 0.2, 0.34 0.24
+                    C 0.36 0.1, 0.44 0.02, 0.5 0.02
+                    Z
+                  " />
+                </clipPath>
+              </defs>
+            </svg>
+            <img
+              src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
+              alt="Hiking in the mist"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              style={{ clipPath: 'url(#boneClip)' }}
+            />
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-[40px] md:gap-[60px] items-start">
           <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80">
             I'm Amara, an aspiring Project Manager who enjoys working at the
@@ -31,16 +52,13 @@ export default function About() {
             creating the structure that helps projects move forward.
           </p>
 
-          <div className="flex flex-col items-center gap-[40px]">
-           
-            <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80">
-              My experience has grown through digital, community and
-              technology-focused projects, where I've learned that successful
-              project management isn't only about timelines and deliverables.
-              It's also about understanding people, communicating clearly and
-              adapting when things don't go according to plan.
-            </p>
-          </div>
+          <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80">
+            My experience has grown through digital, community and
+            technology-focused projects, where I've learned that successful
+            project management isn't only about timelines and deliverables.
+            It's also about understanding people, communicating clearly and
+            adapting when things don't go according to plan.
+          </p>
         </div>
 
         <blockquote className="mt-[60px] border-l-4 border-soft-aqua pl-[24px] py-2">
