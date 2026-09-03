@@ -2,40 +2,28 @@ export default function About() {
   return (
     <section id="about" className="bg-beige py-[100px] md:py-[120px]">
       <div className="max-w-[1100px] mx-auto px-[20px] md:px-[50px] lg:px-[80px]">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-[40px] md:gap-[60px] mb-10">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-[40px] md:gap-[300px] mb-10">
           {/* Heading */}
-          <h2 className="font-serif text-[42px] md:text-[52px] text-espresso leading-tight">
+          <h2 className="font-serif text-[62px] md:text-[72px] text-espresso leading-tight">
             A little
             <br />
             <span className="text-peacock italic">about me.</span>
           </h2>
 
-          <div className="group w-[250px] h-[250px] shrink-0">
-            <svg className="w-full h-full block">
-              <defs>
-                <clipPath id="boneClip" clipPathUnits="objectBoundingBox">
-                  <path d="
-                    M 0.5 0.02
-                    C 0.62 0, 0.72 0.08, 0.68 0.22
-                    C 0.86 0.16, 0.98 0.3, 0.94 0.46
-                    C 0.98 0.5, 0.98 0.56, 0.9 0.58
-                    C 0.92 0.74, 0.8 0.86, 0.66 0.78
-                    C 0.62 0.9, 0.55 0.99, 0.45 0.95
-                    C 0.4 0.99, 0.34 0.94, 0.38 0.82
-                    C 0.24 0.88, 0.1 0.76, 0.16 0.6
-                    C 0.06 0.58, 0.05 0.5, 0.12 0.46
-                    C 0.1 0.32, 0.2 0.2, 0.34 0.24
-                    C 0.36 0.1, 0.44 0.02, 0.5 0.02
-                    Z
-                  " />
-                </clipPath>
-              </defs>
-            </svg>
+          <div className="group relative w-[300px] h-[250px] shrink-0 grid place-items-center">
+            {/* rotating dashed ring */}
+            <div
+              className="absolute inset-0 rounded-full border-[2px] border-dashed border-peacock/40 animate-spin"
+              style={{ animationDuration: '30s' }}
+            ></div>
+            {/* smaller solid accent ring */}
+            <div className="absolute inset-[25px] rounded-full border border-pastel-teal"></div>
+
+            {/* image - regular circle */}
             <img
               src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
               alt="Hiking in the mist"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              style={{ clipPath: 'url(#boneClip)' }}
+              className="w-[200px] h-[190px] object-cover rounded-full transition-transform duration-700 group-hover:scale-105"
             />
           </div>
         </div>

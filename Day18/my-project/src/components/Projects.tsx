@@ -33,9 +33,7 @@ export default function Projects() {
   return (
     <section id="project" className="bg-ivory py-[100px] md:py-[120px]">
       <div className="max-w-[1100px] mx-auto px-[20px] md:px-[50px] lg:px-[80px]">
-        <p className="text-[13px] font-bold text-ocean tracking-[2px] uppercase mb-4">
-          Selected Work
-        </p>
+       
         <h2 className="font-serif text-[42px] md:text-[52px] text-espresso mb-16 leading-tight">
           Projects that show
           <br />
