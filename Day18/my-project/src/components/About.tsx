@@ -53,32 +53,38 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 gap-[30px]">
             {/* Photography card */}
-            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden">
+            <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
               <img
                 src="/The Independent Photographer Has Released The Winners Of Its Travel Photography Contest.jpg"
                 alt="Photography"
-                className="w-full h-[200px] object-cover rounded-[14px] mb-6"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <h4 className="font-serif text-[22px] text-deep-teal mb-2">Photography</h4>
-              <p className="text-[15px] leading-[26px] text-espresso/70">
+            <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
+            <div className="relative z-10">
+              <h4 className="font-serif text-[22px] text-white mb-2">Photography</h4>
+              <p className="text-[15px] leading-[26px] text-white/80">
                 Capturing details, people and places.
-              </p>
-            </div>
-
-            {/* Exploring card */}
-            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden">
-              <img
-                src="/explorer.jpg"
-                alt="Exploring new places"
-                className="w-full h-[200px] object-cover rounded-[14px] mb-6"
-              />
-              <h4 className="font-serif text-[22px] text-deep-teal mb-2">Exploring new places</h4>
-              <p className="text-[15px] leading-[26px] text-espresso/70">
-                Discovering new environments, cultures and perspectives.
               </p>
             </div>
           </div>
         </div>
+
+        {/* Exploring card */}
+        <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
+          <img
+            src="/explorer.jpg"
+            alt="Exploring new places"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
+          <div className="relative z-10">
+          <h4 className="font-serif text-[22px] text-white mb-2">Exploring new places</h4>
+          <p className="text-[15px] leading-[26px] text-white/80">
+            Discovering new environments, cultures and perspectives.
+          </p>
+        </div>
+      </div>
+    </div>
       </div>
     </section>
   )
