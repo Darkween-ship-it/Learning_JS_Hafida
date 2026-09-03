@@ -59,32 +59,32 @@ export default function About() {
                 alt="Photography"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-            <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
-            <div className="relative z-10">
-              <h4 className="font-serif text-[22px] text-white mb-2">Photography</h4>
-              <p className="text-[15px] leading-[26px] text-white/80">
-                Capturing details, people and places.
-              </p>
+              <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
+              <div className="relative z-10">
+                <h4 className="font-serif text-[22px] text-white mb-2">Photography</h4>
+                <p className="text-[15px] leading-[26px] text-white/80">
+                  Capturing details, people and places.
+                </p>
+              </div>
+            </div>
+
+            {/* Exploring card */}
+            <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
+              <img
+                src="/explorer.jpg"
+                alt="Exploring new places"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
+              <div className="relative z-10">
+                <h4 className="font-serif text-[22px] text-white mb-2">Exploring new places</h4>
+                <p className="text-[15px] leading-[26px] text-white/80">
+                  Discovering new environments, cultures and perspectives.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Exploring card */}
-        <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
-          <img
-            src="/explorer.jpg"
-            alt="Exploring new places"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
-          <div className="relative z-10">
-          <h4 className="font-serif text-[22px] text-white mb-2">Exploring new places</h4>
-          <p className="text-[15px] leading-[26px] text-white/80">
-            Discovering new environments, cultures and perspectives.
-          </p>
-        </div>
-      </div>
-    </div>
       </div>
     </section>
   )
