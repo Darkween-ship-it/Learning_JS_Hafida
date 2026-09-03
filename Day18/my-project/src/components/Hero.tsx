@@ -1,5 +1,3 @@
-import AvailabilityBadge from './AvailabilityBadge'
-
 export default function Hero() {
   return (
     <section className="relative flex items-center justify-between pl-[110px] pr-0 max-w-[1600px] mx-auto min-h-[calc(100vh-90px)] gap-10">
@@ -44,10 +42,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Small supporting text */}
-        <p className="text-[14px] md:text-[15px] font-medium text-ocean mt-10">
-          Digital · Community · Technology
-        </p>
+        
       </div>
 
       {/* Right - Hero Image with arched left edge */}

@@ -53,8 +53,12 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 gap-[30px]">
             {/* Photography card */}
-            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow">
-              <div className="text-[40px] mb-4">📷</div>
+            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden">
+              <img
+                src="/The Independent Photographer Has Released The Winners Of Its Travel Photography Contest.jpg"
+                alt="Photography"
+                className="w-full h-[200px] object-cover rounded-[14px] mb-6"
+              />
               <h4 className="font-serif text-[22px] text-deep-teal mb-2">Photography</h4>
               <p className="text-[15px] leading-[26px] text-espresso/70">
                 Capturing details, people and places.
@@ -62,8 +66,12 @@ export default function About() {
             </div>
 
             {/* Exploring card */}
-            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow">
-              <div className="text-[40px] mb-4">✈️</div>
+            <div className="bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden">
+              <img
+                src="/explorer.jpg"
+                alt="Exploring new places"
+                className="w-full h-[200px] object-cover rounded-[14px] mb-6"
+              />
               <h4 className="font-serif text-[22px] text-deep-teal mb-2">Exploring new places</h4>
               <p className="text-[15px] leading-[26px] text-espresso/70">
                 Discovering new environments, cultures and perspectives.
