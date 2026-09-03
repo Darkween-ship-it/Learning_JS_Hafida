@@ -69,44 +69,44 @@ export default function Projects() {
           <span className="text-peacock italic">how I work.</span>
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-[30px]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
           {projects.map((project, i) => {
             const style = cardStyles[i % cardStyles.length]
             return (
               <article
                 key={project.id}
-                className={`group ${style.container} p-[36px] md:p-[44px] transition-all cursor-pointer hover:border-pastel-teal`}
+                className={`group ${style.container} p-[22px] md:p-[26px] transition-all cursor-pointer hover:border-pastel-teal flex flex-col`}
               >
-                {/* Project number */}
-                <div className="flex items-center justify-between mb-8">
+                {/* Project number + role */}
+                <div className="flex items-center justify-between mb-5">
                   <span
-                    className={`font-serif text-[28px] transition-colors ${style.number}`}
+                    className={`font-serif text-[22px] transition-colors ${style.number}`}
                   >
                     {project.id}
                   </span>
                   <span
-                    className={`text-[13px] font-semibold px-[16px] py-[6px] rounded-full ${style.role}`}
+                    className={`text-[11px] font-semibold px-[10px] py-[4px] rounded-full ${style.role}`}
                   >
                     {project.role}
                   </span>
                 </div>
 
                 {/* Project name */}
-                <h3 className="font-serif text-[26px] md:text-[30px] text-deep-teal mb-3 leading-tight">
+                <h3 className="font-serif text-[20px] md:text-[22px] text-deep-teal mb-2 leading-tight">
                   {project.name}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[16px] leading-[28px] text-espresso/75 mb-6">
+                <p className="text-[14px] leading-[24px] text-espresso/75 mb-5 flex-grow">
                   {project.description}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={`text-[12px] font-medium px-[12px] py-[4px] rounded-full ${style.tag}`}
+                      className={`text-[11px] font-medium px-[10px] py-[3px] rounded-full ${style.tag}`}
                     >
                       {tag}
                     </span>
@@ -116,7 +116,7 @@ export default function Projects() {
                 {/* Link */}
                 <a
                   href={`#project-${project.id}`}
-                  className="inline-flex items-center gap-2 text-[15px] font-semibold text-deep-teal no-underline group-hover:text-peacock transition-colors"
+                  className="inline-flex items-center gap-2 text-[14px] font-semibold text-deep-teal no-underline group-hover:text-peacock transition-colors"
                 >
                   View case study
                   <span className="group-hover:translate-x-1 transition-transform">
