@@ -8,6 +8,17 @@ export default function About() {
           <span className="text-peacock italic">about me.</span>
         </h2>
 
+         {/* Hiking image - irregular blob shape */}
+            <div className="group w-full max-w-[250px]">
+              <img
+                src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
+                alt="Hiking in the mist"
+                className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{
+                  borderRadius: '30% 0% 55% 45% / 60% 40% 60% 40%',
+                }}
+              />
+            </div>
         <div className="grid md:grid-cols-2 gap-[40px] md:gap-[60px] items-start">
           <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80">
             I'm Amara, an aspiring Project Manager who enjoys working at the
@@ -20,18 +31,8 @@ export default function About() {
             creating the structure that helps projects move forward.
           </p>
 
-          {/* Hiking image - irregular blob shape */}
-            <div className="group w-full max-w-[250px]">
-              <img
-                src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
-                alt="Hiking in the mist"
-                className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{
-                  borderRadius: '30% 0% 55% 45% / 60% 40% 60% 40%',
-                }}
-              />
-            </div>
           <div className="flex flex-col items-center gap-[40px]">
+           
             <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80">
               My experience has grown through digital, community and
               technology-focused projects, where I've learned that successful
@@ -39,7 +40,6 @@ export default function About() {
               It's also about understanding people, communicating clearly and
               adapting when things don't go according to plan.
             </p>
-            
           </div>
         </div>
 
