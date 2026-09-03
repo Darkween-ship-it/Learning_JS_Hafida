@@ -27,6 +27,17 @@ export default function About() {
             adapting when things don't go according to plan.
           </p>
         </div>
+        {/* Hiking image - irregular blob shape */}
+        <div className="group max-w-[480px] mx-auto mt-[60px]">
+          <img
+            src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
+            alt="Hiking in the mist"
+            className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
+            style={{
+              borderRadius: '63% 37% 55% 45% / 55% 62% 38% 45%',
+            }}
+          />
+        </div>
 
         <blockquote className="mt-[60px] border-l-4 border-soft-aqua pl-[24px] py-2">
           <p className="font-serif text-[22px] md:text-[28px] text-deep-teal leading-snug italic">
