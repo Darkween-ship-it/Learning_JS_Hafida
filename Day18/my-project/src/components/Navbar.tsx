@@ -2,16 +2,16 @@ const navLinks = ['Home', 'About', 'Project', 'Experience', 'Skills', 'Achieveme
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-[78px] py-[35px] max-w-[1440px] mx-auto">
-      <span className="text-[20px] font-medium text-[#1a1a1a] tracking-tight">
+    <nav className="flex items-center justify-between px-[20px] md:px-[50px] lg:px-[78px] py-[20px] md:py-[35px] max-w-[1440px] mx-auto">
+      <span className="text-[18px] md:text-[20px] font-bold text-deep-teal tracking-tight font-sans">
         Amara Mbarga
       </span>
-      <ul className="flex items-center gap-[40px] list-none m-0 p-0">
+      <ul className="hidden md:flex items-center gap-[24px] lg:gap-[40px] list-none m-0 p-0">
         {navLinks.map((link) => (
           <li key={link}>
             <a
               href={`#${link.toLowerCase()}`}
-              className="text-[15px] font-medium text-[#1a1a1a] no-underline hover:text-teal transition-colors"
+              className="text-[13px] md:text-[15px] font-medium text-espresso no-underline hover:text-peacock transition-colors"
             >
               {link}
             </a>

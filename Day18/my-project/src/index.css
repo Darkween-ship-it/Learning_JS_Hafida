@@ -1,17 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F7F3EB;
-  --color-teal: #087F80;
-  --color-teal-dark: #124F52;
-  --color-text-body: #5B6D76;
-  --color-border-light: #D7D1C7;
+  /* Teal palette */
+  --color-deep-teal: #0B4F50;
+  --color-peacock: #087F80;
+  --color-ocean: #167C7D;
+  --color-soft-aqua: #8FCFC8;
+  --color-pastel-teal: #B8DCD5;
+
+  /* Warm neutral palette */
+  --color-ivory: #F7F3EB;
+  --color-beige: #E8DDCE;
+  --color-sand: #D9C7B0;
+  --color-cocoa: #76533F;
+  --color-chocolate: #4A3024;
+  --color-espresso: #2C211C;
+
+  /* Fonts */
+  --font-serif: 'DM Serif Display', serif;
+  --font-sans: 'Manrope', system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   background-color: #F7F3EB;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
+  color: #2C211C;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

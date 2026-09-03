@@ -2,47 +2,63 @@ import AvailabilityBadge from './AvailabilityBadge'
 
 export default function Hero() {
   return (
-    <section className="flex items-center justify-between px-[110px] pt-[10px] pb-[80px] max-w-[1440px] mx-auto gap-[60px]">
+    <section className="relative flex items-center justify-between pl-[110px] pr-0 max-w-[1600px] mx-auto min-h-[calc(100vh-90px)] gap-10">
       {/* Left Content */}
-      <div className="flex flex-col max-w-[560px]">
-        <h1 className="text-[65px] font-bold text-teal leading-none mb-[60px] tracking-tight">
-          Turning ideas into Measurable outcomes<span className="cursor-blink">|</span>
-        </h1>
-
-        <p className="text-[28px] leading-[40px] text-text-body mb-[50px] font-normal">
-          Hey, I'm Amara N. Mbarga an aspiring project
-          Manager passionate about bringing peoples,
-          ideas and execution together, through digital,
-          community and Tech projects. I have learned
-          how to coordinate challenges and turn plans
-          into meaningful results
+      <div className="flex flex-col max-w-[620px]">
+        {/* Small label */}
+        <p className="text-[13px] font-bold text-ocean tracking-[2px] mb-6 uppercase">
+          Aspiring Project Manager · Portfolio 2026
         </p>
 
-        <div className="flex gap-[18px]">
+        {/* Headline - serif */}
+        <h1 className="font-serif text-[54px] md:text-[64px] lg:text-[76px] leading-[0.95] text-espresso mb-8">
+          Turn{' '}
+          <span className="text-peacock">Ideas</span>
+          <br />
+          Into{' '}
+          <span className="text-peacock">Action.</span>
+          <span className="cursor-blink text-peacock">|</span>
+        </h1>
+
+        {/* Intro Paragraph */}
+        <p className="text-[18px] md:text-[20px] lg:text-[22px] leading-[34px] text-cocoa mb-10 font-normal">
+          Hey, I'm Amara N. Mbarga, an aspiring Project Manager passionate
+          about bringing people, ideas and execution together. I enjoy turning
+          complex challenges into clear plans and helping teams move from an
+          idea to a meaningful result.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex gap-[14px] md:gap-[18px] flex-wrap">
           <a
             href="#project"
-            className="bg-teal-dark text-white px-[36px] py-[16px] rounded-[14px] text-[18px] font-medium no-underline hover:opacity-90 transition-opacity text-center"
+            className="bg-deep-teal text-white px-[32px] md:px-[40px] py-[16px] md:py-[18px] rounded-[14px] text-[16px] md:text-[18px] font-semibold no-underline hover:bg-peacock transition-colors text-center"
           >
-            View my Work
+            View My Work
           </a>
           <a
             href="#contact"
-            className="border border-border-light bg-transparent text-[#1a1a1a] px-[36px] py-[16px] rounded-[14px] text-[18px] font-medium no-underline hover:bg-white/50 transition-colors text-center"
+            className="border-2 border-sand bg-transparent text-espresso px-[32px] md:px-[40px] py-[16px] md:py-[18px] rounded-[14px] text-[16px] md:text-[18px] font-semibold no-underline hover:bg-beige/50 transition-colors text-center"
           >
             Let's Connect
           </a>
         </div>
+
+        {/* Small supporting text */}
+        <p className="text-[14px] md:text-[15px] font-medium text-ocean mt-10">
+          Digital · Community · Technology
+        </p>
       </div>
 
       {/* Right - Hero Image with arched left edge */}
-      <div className="relative flex-shrink-0">
+      <div className="relative flex-shrink-0 self-stretch pr-0">
         <img
           src="/download.jpg"
           alt="Amara Mbarga"
-          className="w-[520px] h-[640px] object-cover"
-          style={{ borderRadius: '220px 0px 0px 220px' }}
+          className="w-[420px] md:w-[480px] lg:w-[560px] object-cover h-[calc(100vh-90px)]"
+          style={{ borderRadius: '250px 0px 0px 0px' }}
         />
-        <AvailabilityBadge />
+        
       </div>
     </section>
   )
