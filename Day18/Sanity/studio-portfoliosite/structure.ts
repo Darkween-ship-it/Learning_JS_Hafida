@@ -7,6 +7,13 @@ import {DocumentTextIcon} from '@sanity/icons/DocumentText'
 import {SparklesIcon} from '@sanity/icons/Sparkles'
 
 const SINGLETONS = ['profile']
+const MANUAL_CONTENT_TYPES = [
+  'project',
+  'experience',
+  'skill',
+  'certification',
+  'achievement',
+]
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -51,8 +58,9 @@ export const structure: StructureResolver = (S) =>
         .icon(SparklesIcon)
         .child(S.documentTypeList('achievement').title('Achievements')),
 
-      // 3. Any remaining content types (filtered to exclude singletons)
+      // 3. Any remaining content types (filtered to exclude singletons and already-added types)
       ...S.documentTypeListItems().filter(
-        (listItem) => !SINGLETONS.includes(listItem.getId() as string),
+        (listItem) =>
+          ![...SINGLETONS, ...MANUAL_CONTENT_TYPES].includes(listItem.getId() as string),
       ),
     ])
