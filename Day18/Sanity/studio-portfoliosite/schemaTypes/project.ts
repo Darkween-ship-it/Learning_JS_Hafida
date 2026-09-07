@@ -134,6 +134,37 @@ export default defineType({
     }),
 
     defineField({
+      name: 'links',
+      title: 'Links',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              description: 'For example: Project archive, LinkedIn.',
+            }),
+            defineField({
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'label',
+              subtitle: 'url',
+            },
+          },
+        }),
+      ],
+      description: 'Professional or project links shown in the case-study information panel.',
+    }),
+
+    defineField({
       name: 'challenges',
       title: 'Challenges',
       type: 'array',

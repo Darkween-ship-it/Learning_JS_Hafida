@@ -75,6 +75,15 @@ export type Profile = {
   links?: ProfileLink[]
 }
 
+export type PortfolioContent = {
+  projects: Project[]
+  experiences: Experience[]
+  skills: Skill[]
+  certifications: Certification[]
+  achievements: Achievement[]
+  profile: Profile | null
+}
+
 export const projectsQuery = `*[_type == "project"] | order(order asc) {
   _id,
   title,
@@ -141,10 +150,15 @@ export const profileQuery = `*[_type == "profile"][0] {
 }`
 
 export async function fetchPortfolioContent() {
-  const [projects, experiences] = await Promise.all([
-    sanityClient.fetch<Project[]>(projectsQuery),
-    sanityClient.fetch<Experience[]>(experiencesQuery),
-  ])
+  const [projects, experiences, skills, certifications, achievements, profile] =
+    await Promise.all([
+      sanityClient.fetch<Project[]>(projectsQuery),
+      sanityClient.fetch<Experience[]>(experiencesQuery),
+      sanityClient.fetch<Skill[]>(skillsQuery),
+      sanityClient.fetch<Certification[]>(certificationsQuery),
+      sanityClient.fetch<Achievement[]>(achievementsQuery),
+      sanityClient.fetch<Profile | null>(profileQuery),
+    ])
 
-  return {projects, experiences}
+  return {projects, experiences, skills, certifications, achievements, profile}
 }
