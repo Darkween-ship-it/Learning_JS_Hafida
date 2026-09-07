@@ -109,7 +109,7 @@ export default function ProjectCaseStudy() {
   const next = idx >= 0 ? allProjects[(idx + 1) % allProjects.length] : undefined
 
   const coverUrl = project.coverImage?.asset
-    ? urlFor(project.coverImage).width(1800).url()
+    ? urlFor(project.coverImage).width(1400).url()
     : undefined
   const galleryUrls =
     project.gallery?.map((g) =>
@@ -122,8 +122,8 @@ export default function ProjectCaseStudy() {
 
       {/* 01 — Two-column editorial hero */}
       <header className="bg-ivory">
-        <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px] pt-14 pb-16 md:pb-24">
-          <div className="grid lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-start">
+        <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px] pt-16 pb-16 md:pb-28">
+          <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-20 items-start">
             {/* Left — identity + visual */}
             <div>
               <p className="text-[13px] font-bold tracking-[2px] uppercase text-ocean mb-6">
@@ -133,22 +133,24 @@ export default function ProjectCaseStudy() {
                 Past Case Study
               </p>
 
-              <h1 className="font-serif text-[40px] md:text-[64px] lg:text-[78px] leading-[0.98] text-espresso max-w-[820px]">
+              <h1 className="font-serif text-[36px] md:text-[54px] lg:text-[68px] leading-[1.02] text-espresso max-w-[820px]">
                 {project.title}
               </h1>
 
-              <p className="mt-7 text-[17px] md:text-[19px] leading-[30px] text-espresso/70 max-w-[640px]">
+              <p className="mt-8 text-[18px] md:text-[20px] leading-[32px] text-espresso/70 max-w-[640px]">
                 {project.description}
               </p>
 
               {coverUrl ? (
-                <img
-                  src={coverUrl}
-                  alt={project.title}
-                  className="mt-10 w-full h-[340px] md:h-[460px] lg:h-[520px] object-cover rounded-[12px]"
-                />
+                <div className="mt-12 w-full max-w-[880px] overflow-hidden rounded-[24px]">
+                  <img
+                    src={coverUrl}
+                    alt={project.title}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               ) : (
-                <div className="mt-10 w-full h-[340px] md:h-[460px] bg-beige rounded-[12px]"></div>
+                <div className="mt-12 w-full max-w-[880px] h-[420px] bg-beige rounded-[24px]"></div>
               )}
             </div>
 
