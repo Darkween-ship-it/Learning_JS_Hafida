@@ -5,11 +5,11 @@ export default function Hero() {
       <div className="flex flex-col max-w-[620px]">
         {/* Small label */}
         <p className="text-[13px] font-bold text-ocean tracking-[2px] mb-6 uppercase">
-          Aspiring Project Manager · Portfolio 2026
+          Aspiring Project Manager <span className="border-t-2 border-peacock"></span>
         </p>
 
         {/* Headline - serif */}
-        <h1 className="font-serif text-[54px] md:text-[64px] lg:text-[76px] leading-[0.95] text-espresso mb-8">
+        <h1 className="font-serif text-[52px] md:text-[64px] lg:text-[76px] leading-[0.95] text-espresso mb-7">
           Turn{' '}
           <span className="text-peacock">Ideas</span>
           <br />
@@ -19,7 +19,7 @@ export default function Hero() {
         </h1>
 
         {/* Intro Paragraph */}
-        <p className="text-[18px] md:text-[20px] lg:text-[22px] leading-[34px] text-cocoa mb-10 font-normal">
+        <p className="text-[16px] md:text-[20px] lg:text-[22px] leading-[34px] text-cocoa mb-9 font-normal">
           Hey, I'm Amara N. Mbarga, an aspiring Project Manager passionate
           about bringing people, ideas and execution together. I enjoy turning
           complex challenges into clear plans and helping teams move from an

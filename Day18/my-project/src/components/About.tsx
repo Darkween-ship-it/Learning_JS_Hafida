@@ -11,19 +11,19 @@ export default function About() {
           </h2>
 
           <div className="group relative w-[300px] h-[250px] shrink-0 grid place-items-center">
-            {/* rotating dashed ring */}
+            {/* rotating dashed square frame */}
             <div
-              className="absolute inset-0 rounded-full border-[2px] border-dashed border-peacock/40 animate-spin"
+              className="absolute inset-0 border-[2px] border-dashed border-peacock/40 animate-spin"
               style={{ animationDuration: '30s' }}
             ></div>
-            {/* smaller solid accent ring */}
-            <div className="absolute inset-[25px] rounded-full border border-pastel-teal"></div>
+            {/* smaller solid accent square */}
+            <div className="absolute inset-[25px] border border-pastel-teal"></div>
 
-            {/* image - regular circle */}
+            {/* image - regular square */}
             <img
               src="/Misty Morning Hikes & Wilderkind Moods _ UK Travel Aesthetic.jpg"
               alt="Hiking in the mist"
-              className="w-[200px] h-[190px] object-cover rounded-full transition-transform duration-700 group-hover:scale-105"
+              className="w-[230px] h-[190px] object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
         </div>
