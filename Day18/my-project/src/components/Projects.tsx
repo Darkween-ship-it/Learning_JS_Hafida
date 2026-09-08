@@ -116,7 +116,7 @@ export default function Projects({projects}: {projects?: Project[]}) {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
-                    <span key={tag} className={`text-[11px] font-medium px-[10px] py-[3px] rounded-full ${style.tag}`}>
+                    <span key={tag} className={`inline-flex items-center shrink-0 text-[11px] font-medium px-[10px] py-[3px] rounded-full ${style.tag}`}>
                       {tag}
                     </span>
                   ))}

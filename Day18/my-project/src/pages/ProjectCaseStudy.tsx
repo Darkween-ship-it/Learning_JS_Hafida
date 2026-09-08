@@ -273,7 +273,7 @@ export default function ProjectCaseStudy() {
                     {project.tools.map((tool) => (
                       <span
                         key={tool}
-                        className="text-[11px] font-medium text-deep-teal bg-pastel-teal/50 px-[10px] py-[4px] rounded-full"
+                        className="inline-flex items-center shrink-0 text-[11px] font-medium text-deep-teal bg-pastel-teal/50 px-[10px] py-[4px] rounded-full"
                       >
                         {tool}
                       </span>
@@ -445,7 +445,7 @@ export default function ProjectCaseStudy() {
                   {project.tags && project.tags.length > 0 && (
                     <div className="flex flex-wrap justify-center gap-2 mt-8">
                       {project.tags.map((t) => (
-                        <span key={t} className="text-[11px] font-medium text-soft-aqua bg-white/10 px-3 py-1.5 rounded-full">
+                        <span key={t} className="inline-flex items-center shrink-0 text-[11px] font-medium text-soft-aqua bg-white/10 px-3 py-1.5 rounded-full">
                           {t}
                         </span>
                       ))}

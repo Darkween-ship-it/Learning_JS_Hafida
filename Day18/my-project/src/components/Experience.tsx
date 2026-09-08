@@ -159,7 +159,7 @@ export default function Experience({experiences}: {experiences?: ExperienceEntry
                         {exp.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-[11px] font-medium text-deep-teal bg-peacock/10 px-[10px] py-[4px] rounded-full"
+                            className="inline-flex items-center shrink-0 text-[11px] font-medium text-deep-teal bg-peacock/10 px-[10px] py-[4px] rounded-full"
                           >
                             {tag}
                           </span>
