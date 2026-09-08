@@ -10,6 +10,28 @@ type ProcessStep = {
   description: string
 }
 
+type Responsibility = {
+  _key?: string
+  title?: string
+  description?: string
+}
+
+type MediaItem = {
+  _key?: string
+  image?: {
+    asset?: { _ref?: string; url?: string }
+    hotspot?: { x: number; y: number }
+  }
+  caption?: string
+  section?: string
+}
+
+type ResultStat = {
+  _key?: string
+  value?: string
+  label?: string
+}
+
 type Project = {
   title: string
   description: string
@@ -23,16 +45,14 @@ type Project = {
   team?: string
   problem?: string
   objective?: string
-  responsibilities?: string[]
+  responsibilities?: Responsibility[]
   process?: ProcessStep[]
   tools?: string[]
   challenges?: string[]
   results?: string
-  lessonsLearned?: string
-  gallery?: {
-    _key?: string
-    asset?: { _ref?: string; url?: string }
-  }[]
+  resultStats?: ResultStat[]
+  lessonsLearned?: string[]
+  gallery?: MediaItem[]
   links?: {
     _key?: string
     label?: string
@@ -65,8 +85,18 @@ const projectQuery = `*[_type == "project" && slug.current == $slug][0] {
   },
   challenges,
   results,
+  resultStats[]{
+    _key,
+    value,
+    label
+  },
   lessonsLearned,
-  gallery,
+  gallery[]{
+    _key,
+    caption,
+    section,
+    image
+  },
   tags,
   order,
   slug
@@ -77,6 +107,32 @@ const allProjectsQuery = `*[_type == "project"] | order(order asc) {
   slug,
   category
 }`
+
+type SectionMediaProps = {
+  items: { key?: string; url: string; caption?: string }[]
+}
+
+function SectionMedia({ items }: SectionMediaProps) {
+  if (items.length === 0) return null
+  return (
+    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {items.map((m) => (
+        <figure key={m.key}>
+          <img
+            src={m.url}
+            alt={m.caption ?? ''}
+            className="w-full h-[280px] md:h-[320px] object-cover rounded-[16px]"
+          />
+          {m.caption && (
+            <figcaption className="mt-3 text-[13px] italic text-cocoa/60">{m.caption}</figcaption>
+          )}
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+const num = (i: number) => String(i + 1).padStart(2, '0')
 
 export default function ProjectCaseStudy() {
   const { slug } = useParams()
@@ -111,10 +167,45 @@ export default function ProjectCaseStudy() {
   const coverUrl = project.coverImage?.asset
     ? urlFor(project.coverImage).width(1400).url()
     : undefined
-  const galleryUrls =
-    project.gallery?.map((g) =>
-      g.asset ? { _key: g._key, url: urlFor(g).width(1200).url() } : undefined,
-    ) ?? []
+
+  const mediaBySection = new Map<string, { key?: string; url: string; caption?: string }[]>()
+  project.gallery?.forEach((g) => {
+    if (!g.image?.asset) return
+    const item = {
+      key: g._key,
+      url: urlFor(g.image).width(1200).url(),
+      caption: g.caption,
+    }
+    const section = g.section ?? 'process'
+    if (!mediaBySection.has(section)) mediaBySection.set(section, [])
+    mediaBySection.get(section)!.push(item)
+  })
+  const mediaFor = (section: string) => mediaBySection.get(section) ?? []
+
+  const lessonsLearned: string[] = Array.isArray(project.lessonsLearned)
+    ? project.lessonsLearned
+    : project.lessonsLearned
+      ? [String(project.lessonsLearned)]
+      : []
+
+  const responsibilities: Responsibility[] = (
+    (project.responsibilities ?? []) as unknown as Array<string | Responsibility>
+  ).map((r) =>
+    typeof r === 'string'
+      ? { title: r }
+      : { _key: r._key, title: r.title, description: r.description },
+  )
+
+  const sectionDefs = [
+    { id: 'problem', name: 'Problem', has: !!project.problem || mediaFor('problem').length > 0 },
+    { id: 'objective', name: 'Objective', has: !!project.objective || mediaFor('objective').length > 0 },
+    { id: 'responsibilities', name: 'Responsibilities', has: responsibilities.length > 0 || mediaFor('responsibilities').length > 0 },
+    { id: 'process', name: 'Process', has: (project.process?.length ?? 0) > 0 || mediaFor('process').length > 0 },
+    { id: 'challenges', name: 'Challenges', has: (project.challenges?.length ?? 0) > 0 || mediaFor('challenges').length > 0 },
+    { id: 'results', name: 'Results', has: !!project.results || (project.resultStats?.length ?? 0) > 0 || mediaFor('results').length > 0 },
+    { id: 'lessons', name: 'Lessons', has: lessonsLearned.length > 0 || mediaFor('lessons').length > 0 },
+  ]
+  const sections = sectionDefs.filter((s) => s.has)
 
   return (
     <main className="min-h-screen bg-ivory">
@@ -216,109 +307,170 @@ export default function ProjectCaseStudy() {
         </div>
       </header>
 
+      {/* Case-study navigation */}
+      <nav className="sticky top-0 z-40 bg-ivory/90 backdrop-blur border-b border-espresso/10">
+        <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px] py-4">
+          <div className="flex items-center gap-6 lg:gap-8 overflow-x-auto">
+            {sections.map((s, i) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className="shrink-0 text-[12px] md:text-[13px] font-bold tracking-[1.5px] uppercase text-deep-teal no-underline hover:text-peacock transition-colors"
+              >
+                <span className="text-peacock/60">{num(i)}</span>
+                <span className="ml-2">{s.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+
       <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px]">
-        {/* 02 — The challenge */}
-        {project.problem && (
-          <section className="max-w-[760px] mb-24">
-            <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">The Challenge</p>
-            <p className="font-serif text-[30px] md:text-[42px] leading-[1.1] text-espresso">
-              {project.problem}
-            </p>
-            {project.objective && (
-              <p className="mt-8 text-[17px] leading-[30px] text-espresso/70">
-                {project.objective}
-              </p>
-            )}
-          </section>
-        )}
+        {sections.map((sect, i) => {
+          const label = `${num(i)} / ${sect.name}`
 
-        {/* 03 — What Louis did */}
-        {(project.responsibilities?.length || project.process?.length) && (
-          <section className="mb-24">
-            <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">My Role</p>
-            <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
-              {project.responsibilities?.map((r, i) => (
-                <div key={i} className="flex gap-5 items-start">
-                  <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="text-[16px] md:text-[18px] text-espresso/80 leading-[28px]">{r}</p>
+          if (sect.id === 'problem') {
+            return (
+              <section key={sect.id} id="problem" className="scroll-mt-28 pt-20 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
+                {project.problem && (
+                  <p className="font-serif text-[28px] md:text-[40px] leading-[1.1] text-espresso max-w-[780px]">
+                    {project.problem}
+                  </p>
+                )}
+                <SectionMedia items={mediaFor('problem')} />
+              </section>
+            )
+          }
+
+          if (sect.id === 'objective') {
+            return (
+              <section key={sect.id} id="objective" className="scroll-mt-28 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
+                {project.objective && (
+                  <p className="text-[17px] md:text-[19px] leading-[30px] text-espresso/75 max-w-[680px]">
+                    {project.objective}
+                  </p>
+                )}
+                <SectionMedia items={mediaFor('objective')} />
+              </section>
+            )
+          }
+
+          if (sect.id === 'responsibilities') {
+            return (
+              <section key={sect.id} id="responsibilities" className="scroll-mt-28 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">{label}</p>
+                <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
+                  {responsibilities.map((r, j) => (
+                    <div key={r._key ?? j} className="flex gap-5 items-start">
+                      <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
+                      <div>
+                        {r.title && <p className="font-serif text-[20px] text-deep-teal mb-1">{r.title}</p>}
+                        {r.description && (
+                          <p className="text-[15px] text-espresso/70 leading-[26px]">{r.description}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              {project.process?.map((p, i) => (
-                <div key={p._key ?? i} className="flex gap-5 items-start">
-                  <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <p className="font-serif text-[20px] text-deep-teal mb-1">{p.step}</p>
-                    <p className="text-[15px] text-espresso/70 leading-[26px]">{p.description}</p>
-                  </div>
+                <SectionMedia items={mediaFor('responsibilities')} />
+              </section>
+            )
+          }
+
+          if (sect.id === 'process') {
+            return (
+              <section key={sect.id} id="process" className="scroll-mt-28 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">{label}</p>
+                <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
+                  {project.process?.map((p, j) => (
+                    <div key={p._key ?? j} className="flex gap-5 items-start">
+                      <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
+                      <div>
+                        <p className="font-serif text-[20px] text-deep-teal mb-1">{p.step}</p>
+                        <p className="text-[15px] text-espresso/70 leading-[26px]">{p.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+                <SectionMedia items={mediaFor('process')} />
+              </section>
+            )
+          }
 
-        {/* 04 — Interwoven gallery */}
-        {galleryUrls.length > 0 && (
-          <section className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {galleryUrls.map((g) =>
-              g ? (
-                <img
-                  key={g._key}
-                  src={g.url}
-                  alt=""
-                  className="w-full h-[320px] object-cover rounded-[8px]"
-                />
-              ) : null,
-            )}
-          </section>
-        )}
+          if (sect.id === 'challenges') {
+            return (
+              <section key={sect.id} id="challenges" className="scroll-mt-28 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
+                <ul className="space-y-4 max-w-[760px]">
+                  {project.challenges?.map((c, j) => (
+                    <li key={j} className="flex gap-4 text-[16px] text-espresso/75 leading-[28px]">
+                      <span className="mt-[10px] shrink-0 w-[7px] h-[7px] rounded-full bg-peacock"></span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+                <SectionMedia items={mediaFor('challenges')} />
+              </section>
+            )
+          }
 
-        {/* 05 — Challenges */}
-        {project.challenges && project.challenges.length > 0 && (
-          <section className="max-w-[760px] mb-24">
-            <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">Challenges</p>
-            <ul className="space-y-4">
-              {project.challenges.map((c, i) => (
-                <li key={i} className="flex gap-4 text-[16px] text-espresso/75 leading-[28px]">
-                  <span className="mt-[10px] shrink-0 w-[7px] h-[7px] rounded-full bg-peacock"></span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
+          if (sect.id === 'results') {
+            return (
+              <section key={sect.id} id="results" className="scroll-mt-28 mb-20">
+                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
+                <div className="bg-deep-teal rounded-[24px] px-8 md:px-16 py-14 md:py-20 text-center">
+                  {(project.resultStats ?? []).length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
+                      {project.resultStats!.map((s) => (
+                        <div key={s._key} className="border-b sm:border-b-0 sm:border-r border-soft-aqua/20 last:border-0 pb-8 sm:pb-0">
+                          <p className="font-serif text-[44px] md:text-[56px] leading-none text-white">
+                            {s.value}
+                          </p>
+                          {s.label && (
+                            <p className="mt-2 text-[12px] font-bold uppercase tracking-[2px] text-soft-aqua">
+                              {s.label}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {project.results && (
+                    <p className="font-serif text-[22px] md:text-[30px] leading-snug text-white max-w-[820px] mx-auto">
+                      {project.results}
+                    </p>
+                  )}
+                  {project.tags && project.tags.length > 0 && (
+                    <div className="flex flex-wrap justify-center gap-2 mt-8">
+                      {project.tags.map((t) => (
+                        <span key={t} className="text-[11px] font-medium text-soft-aqua bg-white/10 px-3 py-1.5 rounded-full">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <SectionMedia items={mediaFor('results')} />
+              </section>
+            )
+          }
 
-        {/* 06 — Impact */}
-        {project.results && (
-          <section className="bg-deep-teal rounded-[24px] px-8 md:px-16 py-14 md:py-20 mb-24 text-center">
-            <p className="text-[11px] font-bold tracking-[2px] uppercase text-soft-aqua mb-6">The Impact</p>
-            <p className="font-serif text-[26px] md:text-[38px] leading-snug text-white max-w-[820px] mx-auto">
-              {project.results}
-            </p>
-            {project.tags && project.tags.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-2 mt-8">
-                {project.tags.map((t) => (
-                  <span key={t} className="text-[11px] font-medium text-soft-aqua bg-white/10 px-3 py-1.5 rounded-full">
-                    {t}
-                  </span>
+          return (
+            <section key={sect.id} id="lessons" className="scroll-mt-28 mb-20">
+              <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
+              <div className="space-y-5 max-w-[760px]">
+                {lessonsLearned.map((l, j) => (
+                  <p key={j} className="font-serif italic text-[22px] md:text-[26px] leading-snug text-espresso/80">
+                    {l}
+                  </p>
                 ))}
               </div>
-            )}
-          </section>
-        )}
-
-        {/* 07 — Lessons */}
-        {project.lessonsLearned && (
-          <section className="max-w-[760px] mb-24">
-            <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">What I Learned</p>
-            <p className="font-serif italic text-[24px] md:text-[30px] leading-snug text-espresso/80">
-              “{project.lessonsLearned}”
-            </p>
-          </section>
-        )}
+              <SectionMedia items={mediaFor('lessons')} />
+            </section>
+          )
+        })}
 
         {/* Footer nav */}
         <footer className="border-t border-espresso/15 py-10 mb-16 flex items-center justify-between">

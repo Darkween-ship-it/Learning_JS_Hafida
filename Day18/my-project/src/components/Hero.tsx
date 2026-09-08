@@ -20,7 +20,7 @@ export default function Hero() {
 
         {/* Intro Paragraph */}
         <p className="text-[16px] md:text-[20px] lg:text-[22px] leading-[34px] text-cocoa mb-9 font-normal">
-          Hey, I'm Amara N. Mbarga, an aspiring Project Manager passionate
+          Hey, I'm Louis Motaze, an aspiring Project Manager passionate
           about bringing people, ideas and execution together. I enjoy turning
           complex challenges into clear plans and helping teams move from an
           idea to a meaningful result.

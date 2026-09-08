@@ -35,28 +35,28 @@ const fallbackProjects = [
 const cardStyles = [
   {
     container:
-      'bg-beige hover:bg-white rounded-tl-[48px] rounded-bl-[20px] rounded-tr-[20px] rounded-br-[48px] border-l-[3px] border-t-[3px] border-t-soft-aqua border-l-soft-aqua',
-    number: 'text-soft-aqua group-hover:text-peacock',
-    role: 'bg-deep-teal text-white',
-    tag: 'bg-pastel-teal/50 text-deep-teal',
+      'bg-beige hover:bg-white rounded-tl-[20px] rounded-bl-[20px] rounded-tr-[20px] rounded-br-[20px] border-l-[3px] border-t-[3px] border-t-cocoa border-l-cocoa',
+    number: 'text-cocoa group-hover:text-chocolate',
+    role: 'bg-chocolate text-white',
+    tag: 'bg-cocoa/15 text-chocolate',
   },
   {
     container:
-      'bg-beige hover:bg-white rounded-tr-[48px] rounded-br-[20px] rounded-tl-[20px] rounded-bl-[48px] border-t-[3px] border-r-[3px] border-t-sand border-r-sand',
-    number: 'text-sand group-hover:text-cocoa',
-    role: 'bg-cocoa text-white',
-    tag: 'bg-sand/40 text-cocoa',
+      'bg-beige hover:bg-white rounded-tr-[20px] rounded-br-[20px] rounded-tl-[20px] rounded-bl-[20px] border-t-[3px] border-r-[3px] border-t-cocoa border-r-cocoa',
+    number: 'text-cocoa group-hover:text-chocolate',
+    role: 'bg-chocolate text-white',
+    tag: 'bg-cocoa/15 text-chocolate',
   },
   {
     container:
-      'bg-beige hover:bg-white rounded-tl-[20px] rounded-bl-[48px] rounded-tr-[48px] rounded-br-[20px] border-l-[3px] border-b-[3px] border-l-peacock border-b-peacock',
-    number: 'text-peacock group-hover:text-ocean',
-    role: 'bg-peacock text-white',
-    tag: 'bg-peacock/10 text-peacock',
+      'bg-beige hover:bg-white rounded-tl-[20px] rounded-bl-[20px] rounded-tr-[20px] rounded-br-[20px] border-l-[3px] border-b-[3px] border-l-cocoa border-b-cocoa',
+    number: 'text-cocoa group-hover:text-chocolate',
+    role: 'bg-chocolate text-white',
+    tag: 'bg-cocoa/15 text-chocolate',
   },
   {
     container:
-      'bg-beige hover:bg-white rounded-tr-[20px] rounded-br-[48px] rounded-tl-[48px] rounded-bl-[20px] border-r-[3px] border-b-[3px] border-b-cocoa',
+      'bg-beige hover:bg-white rounded-tr-[20px] rounded-br-[20px] rounded-tl-[20px] rounded-bl-[20px] border-r-[3px] border-b-[3px] border-b-cocoa',
     number: 'text-cocoa group-hover:text-chocolate',
     role: 'bg-chocolate text-white',
     tag: 'bg-cocoa/15 text-chocolate',

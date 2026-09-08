@@ -4,9 +4,9 @@ export default function About() {
       <div className="max-w-[1100px] mx-auto px-[20px] md:px-[50px] lg:px-[80px]">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-[40px] md:gap-[300px] mb-10">
           {/* Heading */}
-          <h2 className="font-serif text-[62px] md:text-[72px] text-espresso leading-tight">
+          <h2 className="font-serif text-[60px] md:text-[72px] text-espresso leading-tight">
             A little
-            <br />
+            <br></br>
             <span className="text-peacock italic">about me.</span>
           </h2>
 
@@ -56,56 +56,6 @@ export default function About() {
           </p>
         </blockquote>
 
-        {/* Human side */}
-        <div className="mt-[100px]">
-          <h3 className="font-serif text-[32px] md:text-[40px] text-espresso mb-8">
-            When I'm not managing projects...
-          </h3>
-          <p className="text-[16px] md:text-[18px] leading-[32px] text-espresso/80 max-w-[700px] mb-10">
-            You'll probably find me with a camera in my hands or planning my next
-            trip. Photography has taught me to slow down and notice details.
-            Exploring new places has taught me to stay curious, adapt quickly and
-            appreciate different perspectives.
-            <br />
-            <br />
-            Both have shaped the way I approach projects:{' '}
-            <strong className="text-deep-teal">observe, understand, adapt and create.</strong>
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-[30px]">
-            {/* Photography card */}
-            <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
-              <img
-                src="/The Independent Photographer Has Released The Winners Of Its Travel Photography Contest.jpg"
-                alt="Photography"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
-              <div className="relative z-10">
-                <h4 className="font-serif text-[22px] text-white mb-2">Photography</h4>
-                <p className="text-[15px] leading-[26px] text-white/80">
-                  Capturing details, people and places.
-                </p>
-              </div>
-            </div>
-
-            {/* Exploring card */}
-            <div className="group relative bg-ivory rounded-[20px] p-[36px] border border-pastel-teal/40 hover:shadow-lg transition-shadow overflow-hidden h-[320px] flex items-end">
-              <img
-                src="/explorer.jpg"
-                alt="Exploring new places"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-espresso/50 transition-colors duration-500"></div>
-              <div className="relative z-10">
-                <h4 className="font-serif text-[22px] text-white mb-2">Exploring new places</h4>
-                <p className="text-[15px] leading-[26px] text-white/80">
-                  Discovering new environments, cultures and perspectives.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

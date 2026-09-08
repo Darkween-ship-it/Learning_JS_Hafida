@@ -89,8 +89,33 @@ export default defineType({
       name: 'responsibilities',
       title: 'Responsibilities',
       type: 'array',
-      of: [defineArrayMember({type: 'string'})],
-      description: 'List Louis’s specific responsibilities on the project.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'responsibility',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Responsibility',
+              type: 'string',
+              description: 'For example: Programme coordination, Communication, Task tracking.',
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              description: 'What this responsibility actually involved.',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'description',
+            },
+          },
+        }),
+      ],
+      description: 'Louis’s specific responsibilities on the project, each with a short description.',
     }),
 
     defineField({
@@ -180,25 +205,97 @@ export default defineType({
     }),
 
     defineField({
+      name: 'resultStats',
+      title: 'Result Statistics',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'stat',
+          fields: [
+            defineField({
+              name: 'value',
+              title: 'Value',
+              type: 'string',
+              description: 'For example: 100+',
+            }),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              description: 'For example: participants',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'value',
+              subtitle: 'label',
+            },
+          },
+        }),
+      ],
+      description: 'Key numbers shown as bold statistics in the Results section.',
+    }),
+
+    defineField({
       name: 'lessonsLearned',
       title: 'Lessons Learned',
-      type: 'text',
-      description: 'What did Louis learn from this project?',
+      type: 'array',
+      of: [defineArrayMember({type: 'string'})],
+      description: 'Short lessons from the project. Each entry is shown as a separate takeaway.',
     }),
 
     defineField({
       name: 'gallery',
-      title: 'Photos / Screenshots',
+      title: 'Media Library',
       type: 'array',
       of: [
         defineArrayMember({
-          type: 'image',
-          options: {
-            hotspot: true,
+          type: 'object',
+          name: 'mediaItem',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+              description: 'Short context explaining what the image shows.',
+            }),
+            defineField({
+              name: 'section',
+              title: 'Show in section',
+              type: 'string',
+              initialValue: 'process',
+              options: {
+                list: [
+                  {title: 'Problem', value: 'problem'},
+                  {title: 'Objective', value: 'objective'},
+                  {title: 'Responsibilities', value: 'responsibilities'},
+                  {title: 'Process', value: 'process'},
+                  {title: 'Challenges', value: 'challenges'},
+                  {title: 'Results', value: 'results'},
+                  {title: 'Lessons', value: 'lessons'},
+                ],
+              },
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'caption',
+              subtitle: 'section',
+              media: 'image',
+            },
           },
         }),
       ],
-      description: 'Upload photos, screenshots, documents or other visual evidence from the project.',
+      description: 'Media library. Each image is placed into the relevant case-study section instead of a separate gallery.',
     }),
 
     defineField({
