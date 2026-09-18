@@ -105,10 +105,8 @@ export default function Contact({profile}: {profile?: Profile | null}) {
 
   useEffect(() => () => { if (copyTimer.current) window.clearTimeout(copyTimer.current) }, [])
 
-  const name = profile?.name || 'Louis Motaze'
-  const firstName = name.split(' ')[0] || name
   const title = profile?.title || 'Project Management Student & Intern'
-  const email = profile?.email
+  const email = profile?.email || 'hello@example.com'
   const links = profile?.links || []
   const year = new Date().getFullYear()
   const mailto = email ? `mailto:${email}` : ''
@@ -244,7 +242,7 @@ export default function Contact({profile}: {profile?: Profile | null}) {
       <div className="border-t border-ivory/10">
         <div className="max-w-[980px] mx-auto px-[20px] md:px-[40px] py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <p className="text-[13px] font-semibold text-ivory/70">{name}</p>
+            <p className="text-[13px] font-semibold text-ivory/70">{email}</p>
             <p className="text-[12px] text-ivory/40">{title}</p>
           </div>
           <div className="flex items-center gap-6">
