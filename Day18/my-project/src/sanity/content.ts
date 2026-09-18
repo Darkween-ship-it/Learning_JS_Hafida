@@ -72,7 +72,32 @@ export type Profile = {
   shortMessage?: string
   email?: string
   location?: string
+  whatsappUrl?: string
   links?: ProfileLink[]
+  // Hero — client-controlled
+  heroLabel?: string
+  heroHeadline?: {
+    _key?: string
+    lead?: string
+    accent?: string
+  }[]
+  heroIntro?: string
+  heroImage?: {
+    asset?: {_ref?: string; url?: string}
+    hotspot?: {x: number; y: number}
+    alt?: string
+  }
+  // About — client-controlled
+  aboutHeadingLead?: string
+  aboutHeadingAccent?: string
+  aboutImage?: {
+    asset?: {_ref?: string; url?: string}
+    hotspot?: {x: number; y: number}
+    alt?: string
+  }
+  aboutParagraph1?: string
+  aboutParagraph2?: string
+  aboutQuote?: string
 }
 
 export type PortfolioContent = {
@@ -142,11 +167,34 @@ export const profileQuery = `*[_type == "profile"][0] {
   shortMessage,
   email,
   location,
+  whatsappUrl,
   links[]{
     _key,
     label,
     url
-  }
+  },
+  heroLabel,
+  heroHeadline[]{
+    _key,
+    lead,
+    accent
+  },
+  heroIntro,
+  heroImage{
+    asset,
+    hotspot,
+    alt
+  },
+  aboutHeadingLead,
+  aboutHeadingAccent,
+  aboutImage{
+    asset,
+    hotspot,
+    alt
+  },
+  aboutParagraph1,
+  aboutParagraph2,
+  aboutQuote
 }`
 
 export async function fetchPortfolioContent() {

@@ -29,10 +29,80 @@ export default defineType({
     }),
 
     defineField({
+      name: 'heroLabel',
+      title: 'Hero Label',
+      type: 'string',
+      description: 'Small label above the headline. For example: Aspiring Project Manager.',
+    }),
+
+    defineField({
+      name: 'heroHeadline',
+      title: 'Hero Headline',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'lead',
+              title: 'Plain part',
+              type: 'string',
+              description: 'For example: "Turn".',
+            }),
+            defineField({
+              name: 'accent',
+              title: 'Highlighted part',
+              type: 'string',
+              description: 'For example: "Ideas".',
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'lead',
+              subtitle: 'accent',
+            },
+          },
+        },
+      ],
+      description: 'Each line has a plain part and a highlighted part.',
+    }),
+
+    defineField({
+      name: 'heroIntro',
+      title: 'Hero Intro',
+      type: 'text',
+      description: 'The short paragraph under the headline.',
+    }),
+
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Describe what the image shows for accessibility.',
+        }),
+      ],
+    }),
+
+    defineField({
       name: 'email',
       title: 'Email',
       type: 'string',
       validation: (rule) => rule.email(),
+    }),
+
+    defineField({
+      name: 'whatsappUrl',
+      title: 'WhatsApp',
+      type: 'url',
+      description: 'Optional. A WhatsApp link such as https://wa.me/2376XXXXXXXX.',
     }),
 
     defineField({
@@ -70,7 +140,57 @@ export default defineType({
           },
         },
       ],
-      description: 'LinkedIn, GitHub, or any other professional links.',
+      description: 'LinkedIn, GitHub, website, or any other professional links.',
+    }),
+
+    defineField({
+      name: 'aboutHeadingLead',
+      title: 'About Heading (plain part)',
+      type: 'string',
+      description: 'For example: "A little".',
+    }),
+
+    defineField({
+      name: 'aboutHeadingAccent',
+      title: 'About Heading (highlighted part)',
+      type: 'string',
+      description: 'For example: "about me."',
+    }),
+
+    defineField({
+      name: 'aboutImage',
+      title: 'About Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Describe what the image shows for accessibility.',
+        }),
+      ],
+    }),
+
+    defineField({
+      name: 'aboutParagraph1',
+      title: 'About Paragraph 1',
+      type: 'text',
+    }),
+
+    defineField({
+      name: 'aboutParagraph2',
+      title: 'About Paragraph 2',
+      type: 'text',
+    }),
+
+    defineField({
+      name: 'aboutQuote',
+      title: 'About Quote',
+      type: 'text',
+      description: 'A personal or professional quote shown at the end of the About section.',
     }),
   ],
   preview: {

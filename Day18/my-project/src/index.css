@@ -20,6 +20,43 @@
   /* Fonts */
   --font-serif: 'DM Serif Display', serif;
   --font-sans: 'Manrope', system-ui, sans-serif;
+
+  /* Animations */
+  --animate-section-reveal: section-reveal 0.4s ease both;
+  @keyframes section-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-experience-down: experience-down 0.32s ease-out both;
+  @keyframes experience-down {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-experience-up: experience-up 0.32s ease-out both;
+  @keyframes experience-up {
+    from {
+      opacity: 0;
+      transform: translateY(-14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 body {
@@ -34,4 +71,13 @@ body {
 #root {
   width: 100%;
   min-height: 100svh;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

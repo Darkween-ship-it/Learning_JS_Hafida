@@ -72,17 +72,52 @@ export default defineType({
     }),
 
     defineField({
+      name: 'problemStatement',
+      title: 'Problem Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the problem, shown large. For example: "Young people had ideas. The challenge was turning them into something real."',
+    }),
+
+    defineField({
       name: 'problem',
       title: 'Problem',
       type: 'text',
-      description: 'What problem or situation did the project need to address?',
+      description: 'What problem or situation did the project need to address? Shown as the smaller supporting text under the statement.',
+    }),
+
+    defineField({
+      name: 'problemImage',
+      title: 'Problem Image (Optional)',
+      type: 'captionedImage',
+      description: 'An image that establishes the context of the problem. Leave empty if there is nothing useful to show.',
+    }),
+
+    defineField({
+      name: 'objectiveStatement',
+      title: 'Objective Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the objective, shown large. For example: "Create an environment where ideas could move from concept to action."',
     }),
 
     defineField({
       name: 'objective',
       title: 'Objective',
       type: 'text',
-      description: 'What was the project trying to achieve?',
+      description: 'What was the project trying to achieve? Shown as the smaller supporting text under the statement.',
+    }),
+
+    defineField({
+      name: 'objectiveImage',
+      title: 'Objective Image (Optional)',
+      type: 'captionedImage',
+      description: 'An image that supports the objective, such as a planning document or programme graphic. Leave empty if not useful.',
+    }),
+
+    defineField({
+      name: 'roleStatement',
+      title: 'Role Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the role, shown large. For example: "Keeping people, tasks and moving parts connected."',
     }),
 
     defineField({
@@ -119,6 +154,20 @@ export default defineType({
     }),
 
     defineField({
+      name: 'roleImage',
+      title: 'My Role Image (Optional)',
+      type: 'captionedImage',
+      description: 'A photo of the team or event alongside the responsibilities. Leave empty if not useful.',
+    }),
+
+    defineField({
+      name: 'processStatement',
+      title: 'Process Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the process, shown large.',
+    }),
+
+    defineField({
       name: 'process',
       title: 'Process',
       type: 'array',
@@ -148,6 +197,13 @@ export default defineType({
         }),
       ],
       description: 'Describe the main stages Louis went through during the project.',
+    }),
+
+    defineField({
+      name: 'processImage',
+      title: 'Process Image (Optional)',
+      type: 'captionedImage',
+      description: 'A workflow diagram, planning board or screenshot showing the process. Leave empty if not useful.',
     }),
 
     defineField({
@@ -190,6 +246,13 @@ export default defineType({
     }),
 
     defineField({
+      name: 'challengesStatement',
+      title: 'Challenges Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the challenges, shown large.',
+    }),
+
+    defineField({
       name: 'challenges',
       title: 'Challenges',
       type: 'array',
@@ -198,10 +261,31 @@ export default defineType({
     }),
 
     defineField({
+      name: 'challengesImage',
+      title: 'Challenges Image (Optional)',
+      type: 'captionedImage',
+      description: 'Evidence of a challenge, such as a coordination screenshot. Leave empty if not useful.',
+    }),
+
+    defineField({
+      name: 'resultsStatement',
+      title: 'Results Statement',
+      type: 'text',
+      description: 'A short, memorable summary of the results, shown large.',
+    }),
+
+    defineField({
       name: 'results',
       title: 'Results / Impact',
       type: 'text',
       description: 'What was achieved? Include measurable results only when they can be verified.',
+    }),
+
+    defineField({
+      name: 'resultsImage',
+      title: 'Results Image (Optional)',
+      type: 'captionedImage',
+      description: 'A final outcome photo or presentation shot. Leave empty if not useful.',
     }),
 
     defineField({
@@ -243,6 +327,13 @@ export default defineType({
       type: 'array',
       of: [defineArrayMember({type: 'string'})],
       description: 'Short lessons from the project. Each entry is shown as a separate takeaway.',
+    }),
+
+    defineField({
+      name: 'lessonsImage',
+      title: 'Lessons Image (Optional)',
+      type: 'captionedImage',
+      description: 'A behind-the-scenes image. Often left empty for a quieter close.',
     }),
 
     defineField({

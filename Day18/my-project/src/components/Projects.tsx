@@ -87,15 +87,21 @@ export default function Projects({projects}: {projects?: Project[]}) {
           <span className="text-peacock italic"> how I work.</span>
         </h2>
 
-        {/* 4 project cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-[16px] mb-[40px]">
+        {/* Swipe hint – mobile only */}
+        <p className="sm:hidden flex items-center justify-end gap-2 text-[13px] font-semibold text-ocean mb-[12px]">
+          Swipe
+          <span className="transition-transform">→</span>
+        </p>
+
+        {/* Project cards – swipeable carousel on mobile, grid from sm up */}
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-[16px] mb-[40px] -mx-[20px] sm:mx-0 px-[20px] sm:px-0 overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none no-scrollbar scroll-pl-[12px]">
           {visibleProjects.map((project, i) => {
             const style = cardStyles[i % cardStyles.length]
             const number = String(i + 1).padStart(2, '0')
             return (
               <article
                 key={'_id' in project ? project._id : project.id}
-                className={`group ${style.container} p-[20px] transition-all cursor-pointer hover:border-pastel-teal flex flex-col`}
+                className={`group ${style.container} p-[20px] transition-all cursor-pointer hover:border-pastel-teal flex flex-col h-[340px] shrink-0 w-[80%] sm:w-auto snap-start`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className={`font-serif text-[20px] transition-colors ${style.number}`}>
@@ -110,16 +116,18 @@ export default function Projects({projects}: {projects?: Project[]}) {
                   {'title' in project ? project.title : project.name}
                 </h3>
 
-                <p className="text-[13px] leading-[22px] text-espresso/75 mb-4 flex-grow">
-                  {project.description}
-                </p>
+                <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar mb-4 pr-[2px]">
+                  <p className="text-[13px] leading-[22px] text-espresso/75 mb-4">
+                    {project.description}
+                  </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={`inline-flex items-center shrink-0 text-[11px] font-medium px-[10px] py-[3px] rounded-full ${style.tag}`}>
-                      {tag}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className={`inline-flex items-center shrink-0 text-[11px] font-medium px-[10px] py-[3px] rounded-full ${style.tag}`}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                   { 'slug' in project && project.slug?.current ? (
                     <a

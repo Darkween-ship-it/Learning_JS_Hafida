@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { sanityClient } from '../sanity/client'
 import { urlFor } from '../sanity/image'
@@ -32,6 +32,16 @@ type ResultStat = {
   label?: string
 }
 
+type CaptionedImage = {
+  _key?: string
+  alt?: string
+  caption?: string
+  image?: {
+    asset?: { _ref?: string; url?: string }
+    hotspot?: { x: number; y: number }
+  }
+}
+
 type Project = {
   title: string
   description: string
@@ -43,15 +53,28 @@ type Project = {
   category?: string
   date?: string
   team?: string
+  problemStatement?: string
   problem?: string
+  problemImage?: CaptionedImage
+  objectiveStatement?: string
   objective?: string
+  objectiveImage?: CaptionedImage
+  roleStatement?: string
   responsibilities?: Responsibility[]
+  roleImage?: CaptionedImage
+  processStatement?: string
   process?: ProcessStep[]
+  processImage?: CaptionedImage
   tools?: string[]
+  challengesStatement?: string
   challenges?: string[]
+  challengesImage?: CaptionedImage
+  resultsStatement?: string
   results?: string
+  resultsImage?: CaptionedImage
   resultStats?: ResultStat[]
   lessonsLearned?: string[]
+  lessonsImage?: CaptionedImage
   gallery?: MediaItem[]
   links?: {
     _key?: string
@@ -73,24 +96,65 @@ const projectQuery = `*[_type == "project" && slug.current == $slug][0] {
   date,
   role,
   team,
+  problemStatement,
   problem,
+  problemImage{
+    alt,
+    caption,
+    image
+  },
+  objectiveStatement,
   objective,
+  objectiveImage{
+    alt,
+    caption,
+    image
+  },
+  roleStatement,
   responsibilities,
+  roleImage{
+    alt,
+    caption,
+    image
+  },
+  processStatement,
   process,
+  processImage{
+    alt,
+    caption,
+    image
+  },
   tools,
   links[]{
     _key,
     label,
     url
   },
+  challengesStatement,
   challenges,
+  challengesImage{
+    alt,
+    caption,
+    image
+  },
+  resultsStatement,
   results,
+  resultsImage{
+    alt,
+    caption,
+    image
+  },
   resultStats[]{
     _key,
     value,
     label
   },
   lessonsLearned,
+  lessonsImage{
+    alt,
+    caption,
+    image
+  },
   gallery[]{
     _key,
     caption,
@@ -108,21 +172,89 @@ const allProjectsQuery = `*[_type == "project"] | order(order asc) {
   category
 }`
 
-type SectionMediaProps = {
-  items: { key?: string; url: string; caption?: string }[]
+type LightboxProps = {
+  src: string
+  alt?: string
+  caption?: string
+  onClose: () => void
 }
 
-function SectionMedia({ items }: SectionMediaProps) {
+function Lightbox({ src, alt, caption, onClose }: LightboxProps) {
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    },
+    [onClose],
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [handleKey])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-espresso/80 backdrop-blur-sm p-4 md:p-10 cursor-zoom-out"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-5 right-5 md:top-8 md:right-8 text-ivory/80 hover:text-ivory text-[28px] font-bold leading-none bg-white/10 hover:bg-white/20 rounded-full w-10 h-10 flex items-center justify-center transition-colors cursor-pointer z-10"
+        aria-label="Close"
+      >
+        ×
+      </button>
+      <img
+        src={src}
+        alt={alt ?? ''}
+        className="max-w-full max-h-[90vh] object-contain rounded-[12px] shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+      {caption && (
+        <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-ivory/70 text-[13px] italic whitespace-nowrap">
+          {caption}
+        </p>
+      )}
+    </div>
+  )
+}
+
+type SectionMediaProps = {
+  items: { key?: string; url: string; caption?: string }[]
+  onImageClick: (src: string, alt?: string, caption?: string) => void
+}
+
+function SectionMedia({ items, onImageClick }: SectionMediaProps) {
   if (items.length === 0) return null
   return (
     <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
       {items.map((m) => (
         <figure key={m.key}>
-          <img
-            src={m.url}
-            alt={m.caption ?? ''}
-            className="w-full h-[280px] md:h-[320px] object-cover rounded-[16px]"
-          />
+          <div
+            className="relative max-h-[280px] md:max-h-[320px] overflow-hidden rounded-[16px] cursor-pointer group"
+            onClick={() => onImageClick(m.url, m.caption, m.caption)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onImageClick(m.url, m.caption, m.caption) }}
+          >
+            <img
+              src={m.url}
+              alt={m.caption ?? ''}
+              className="w-full h-auto object-cover"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-espresso text-[13px] font-semibold px-4 py-2 rounded-full shadow-lg">
+                Click to expand
+              </span>
+            </div>
+          </div>
           {m.caption && (
             <figcaption className="mt-3 text-[13px] italic text-cocoa/60">{m.caption}</figcaption>
           )}
@@ -132,15 +264,120 @@ function SectionMedia({ items }: SectionMediaProps) {
   )
 }
 
+type SectionFigureProps = {
+  src?: string
+  alt?: string
+  caption?: string
+  onImageClick?: () => void
+}
+
+function SectionFigure({ src, alt, caption, onImageClick }: SectionFigureProps) {
+  if (!src) return null
+  return (
+    <figure className="mt-10 w-full max-w-[880px]">
+      <div
+        className="relative max-h-[320px] md:max-h-[420px] overflow-hidden rounded-[20px] cursor-pointer group"
+        onClick={onImageClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onImageClick?.() }}
+      >
+        <img
+          src={src}
+          alt={alt ?? ''}
+          className="w-full h-auto object-cover"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-espresso text-[13px] font-semibold px-4 py-2 rounded-full shadow-lg">
+            Click to expand
+          </span>
+        </div>
+      </div>
+      {caption && <figcaption className="mt-3 text-[13px] italic text-cocoa/60">{caption}</figcaption>}
+    </figure>
+  )
+}
+
+type AlternatingRowProps = {
+  flip?: boolean
+  text: ReactNode
+  image?: { src: string; alt?: string; caption?: string }
+  onImageClick?: (src: string, alt?: string, caption?: string) => void
+}
+
+function AlternatingRow({ flip = false, text, image, onImageClick }: AlternatingRowProps) {
+  return (
+    <div className={image ? 'grid lg:grid-cols-2 gap-10 lg:gap-16 items-center' : ''}>
+      <div className={image && flip ? 'lg:order-2' : undefined}>{text}</div>
+      {image && (
+        <div className={flip ? 'lg:order-1' : undefined}>
+          <figure className="w-full">
+            <div
+              className="relative w-full aspect-[4/3] overflow-hidden rounded-[16px] bg-beige cursor-pointer group"
+              onClick={() => onImageClick?.(image.src, image.alt, image.caption)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') onImageClick?.(image.src, image.alt, image.caption)
+              }}
+            >
+              <img
+                src={image.src}
+                alt={image.alt ?? ''}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-espresso text-[13px] font-semibold px-4 py-2 rounded-full shadow-lg">
+                  Click to expand
+                </span>
+              </div>
+            </div>
+            {image.caption && (
+              <figcaption className="mt-3 text-[13px] italic text-cocoa/60">{image.caption}</figcaption>
+            )}
+          </figure>
+        </div>
+      )}
+    </div>
+  )
+}
+
+const resolveCaptionedImage = (field: CaptionedImage | undefined) => {
+  if (!field?.image?.asset) return undefined
+  return {
+    src: urlFor(field.image).width(1200).url(),
+    alt: field.alt,
+    caption: field.caption,
+  }
+}
+
 const num = (i: number) => String(i + 1).padStart(2, '0')
+
+const sectionHeadings: Record<string, string> = {
+  problem: 'The Problem',
+  objective: 'The Objective',
+  responsibilities: 'My Role',
+  process: 'The Process',
+  challenges: 'The Challenges',
+  results: 'The Results',
+  lessons: 'Lessons Learned',
+}
 
 export default function ProjectCaseStudy() {
   const { slug } = useParams()
   const [project, setProject] = useState<Project | null>(null)
   const [allProjects, setAllProjects] = useState<{ title: string; slug: { current: string }; category?: string }[]>([])
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const [lightbox, setLightbox] = useState<{ src: string; alt?: string; caption?: string } | null>(null)
+
+  const openLightbox = useCallback((src: string, alt?: string, caption?: string) => {
+    setLightbox({ src, alt, caption })
+  }, [])
 
   useEffect(() => {
     if (!slug) return
+
+    setActiveId(null)
 
     sanityClient
       .fetch<Project | null>(projectQuery, { slug })
@@ -188,6 +425,10 @@ export default function ProjectCaseStudy() {
       ? [String(project.lessonsLearned)]
       : []
 
+  const resultStats: ResultStat[] = Array.isArray(project.resultStats)
+    ? project.resultStats
+    : []
+
   const responsibilities: Responsibility[] = (
     (project.responsibilities ?? []) as unknown as Array<string | Responsibility>
   ).map((r) =>
@@ -196,16 +437,27 @@ export default function ProjectCaseStudy() {
       : { _key: r._key, title: r.title, description: r.description },
   )
 
+  const problemFigure = resolveCaptionedImage(project.problemImage)
+  const objectiveFigure = resolveCaptionedImage(project.objectiveImage)
+  const roleFigure = resolveCaptionedImage(project.roleImage)
+  const processFigure = resolveCaptionedImage(project.processImage)
+  const challengesFigure = resolveCaptionedImage(project.challengesImage)
+  const resultsFigure = resolveCaptionedImage(project.resultsImage)
+  const lessonsFigure = resolveCaptionedImage(project.lessonsImage)
+
   const sectionDefs = [
-    { id: 'problem', name: 'Problem', has: !!project.problem || mediaFor('problem').length > 0 },
-    { id: 'objective', name: 'Objective', has: !!project.objective || mediaFor('objective').length > 0 },
-    { id: 'responsibilities', name: 'Responsibilities', has: responsibilities.length > 0 || mediaFor('responsibilities').length > 0 },
-    { id: 'process', name: 'Process', has: (project.process?.length ?? 0) > 0 || mediaFor('process').length > 0 },
-    { id: 'challenges', name: 'Challenges', has: (project.challenges?.length ?? 0) > 0 || mediaFor('challenges').length > 0 },
-    { id: 'results', name: 'Results', has: !!project.results || (project.resultStats?.length ?? 0) > 0 || mediaFor('results').length > 0 },
-    { id: 'lessons', name: 'Lessons', has: lessonsLearned.length > 0 || mediaFor('lessons').length > 0 },
+    { id: 'problem', name: 'Problem', has: !!project.problemStatement || !!project.problem || !!problemFigure || mediaFor('problem').length > 0 },
+    { id: 'objective', name: 'Objective', has: !!project.objectiveStatement || !!project.objective || !!objectiveFigure || mediaFor('objective').length > 0 },
+    { id: 'responsibilities', name: 'My Role', has: !!project.roleStatement || responsibilities.length > 0 || !!roleFigure || mediaFor('responsibilities').length > 0 },
+    { id: 'process', name: 'Process', has: !!project.processStatement || (project.process?.length ?? 0) > 0 || !!processFigure || mediaFor('process').length > 0 },
+    { id: 'challenges', name: 'Challenges', has: !!project.challengesStatement || (project.challenges?.length ?? 0) > 0 || !!challengesFigure || mediaFor('challenges').length > 0 },
+    { id: 'results', name: 'Results', has: !!project.resultsStatement || !!project.results || resultStats.length > 0 || !!resultsFigure || mediaFor('results').length > 0 },
+    { id: 'lessons', name: 'Lessons', has: lessonsLearned.length > 0 || !!lessonsFigure || mediaFor('lessons').length > 0 },
   ]
   const sections = sectionDefs.filter((s) => s.has)
+  const active = sections.find((s) => s.id === activeId) ?? sections[0]
+  const activeIndex = Math.max(0, sections.findIndex((s) => s.id === active?.id))
+  const activeLabel = active ? `${num(activeIndex)} / ${sectionHeadings[active.id]}` : ''
 
   return (
     <main className="min-h-screen bg-ivory">
@@ -233,12 +485,23 @@ export default function ProjectCaseStudy() {
               </p>
 
               {coverUrl ? (
-                <div className="mt-12 w-full max-w-[880px] overflow-hidden rounded-[24px]">
+                <div
+                  className="mt-12 w-full max-w-[880px] max-h-[320px] md:max-h-[420px] overflow-hidden rounded-[24px] cursor-pointer group relative"
+                  onClick={() => openLightbox(coverUrl, project.title)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(coverUrl, project.title) }}
+                >
                   <img
                     src={coverUrl}
                     alt={project.title}
                     className="w-full h-auto object-cover"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-espresso text-[13px] font-semibold px-4 py-2 rounded-full shadow-lg">
+                      Click to expand
+                    </span>
+                  </div>
                 </div>
               ) : (
                 <div className="mt-12 w-full max-w-[880px] h-[420px] bg-beige rounded-[24px]"></div>
@@ -307,129 +570,224 @@ export default function ProjectCaseStudy() {
         </div>
       </header>
 
-      {/* Case-study navigation */}
-      <nav className="sticky top-0 z-40 bg-ivory/90 backdrop-blur border-b border-espresso/10">
-        <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px] py-4">
-          <div className="flex items-center gap-6 lg:gap-8 overflow-x-auto">
-            {sections.map((s, i) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                className="shrink-0 text-[12px] md:text-[13px] font-bold tracking-[1.5px] uppercase text-deep-teal no-underline hover:text-peacock transition-colors"
-              >
-                <span className="text-peacock/60">{num(i)}</span>
-                <span className="ml-2">{s.name}</span>
-              </a>
-            ))}
+      {active && (
+        <nav className="sticky top-0 z-40 bg-ivory/90 backdrop-blur border-b border-espresso/10">
+          <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px] py-3">
+            <div className="flex items-center gap-6 lg:gap-8 overflow-x-auto">
+              {sections.map((s, i) => {
+                const isActive = s.id === active.id
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setActiveId(s.id)}
+                    className={`group flex flex-col items-start shrink-0 pb-1 text-[12px] md:text-[13px] font-bold tracking-[1.5px] uppercase bg-transparent border-0 cursor-pointer transition-colors ${
+                      isActive ? 'text-peacock' : 'text-deep-teal hover:text-peacock'
+                    }`}
+                  >
+                    <span>
+                      <span className={`${isActive ? 'text-peacock' : 'text-peacock/60'}`}>{num(i)}</span>
+                      <span className="ml-2">{s.name}</span>
+                    </span>
+                    <span
+                      className={`mt-1 h-[3px] w-full rounded-full transition-all duration-300 ${
+                        isActive ? 'bg-peacock' : 'bg-transparent group-hover:bg-peacock/30'
+                      }`}
+                    ></span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      )}
 
       <div className="max-w-[1400px] mx-auto px-[20px] md:px-[50px] lg:px-[78px]">
-        {sections.map((sect, i) => {
-          const label = `${num(i)} / ${sect.name}`
+        {active && (
+          <div key={active.id} className="pt-16 md:pt-24 animate-section-reveal">
+            <section className="mb-24">
+              <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">{activeLabel}</p>
 
-          if (sect.id === 'problem') {
-            return (
-              <section key={sect.id} id="problem" className="scroll-mt-28 pt-20 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
-                {project.problem && (
-                  <p className="font-serif text-[28px] md:text-[40px] leading-[1.1] text-espresso max-w-[780px]">
-                    {project.problem}
-                  </p>
-                )}
-                <SectionMedia items={mediaFor('problem')} />
-              </section>
-            )
-          }
-
-          if (sect.id === 'objective') {
-            return (
-              <section key={sect.id} id="objective" className="scroll-mt-28 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
-                {project.objective && (
-                  <p className="text-[17px] md:text-[19px] leading-[30px] text-espresso/75 max-w-[680px]">
-                    {project.objective}
-                  </p>
-                )}
-                <SectionMedia items={mediaFor('objective')} />
-              </section>
-            )
-          }
-
-          if (sect.id === 'responsibilities') {
-            return (
-              <section key={sect.id} id="responsibilities" className="scroll-mt-28 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">{label}</p>
-                <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
-                  {responsibilities.map((r, j) => (
-                    <div key={r._key ?? j} className="flex gap-5 items-start">
-                      <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
-                      <div>
-                        {r.title && <p className="font-serif text-[20px] text-deep-teal mb-1">{r.title}</p>}
-                        {r.description && (
-                          <p className="text-[15px] text-espresso/70 leading-[26px]">{r.description}</p>
+              {active.id === 'problem' && (
+                <>
+                  <AlternatingRow
+                    flip={false}
+                    text={
+                      <>
+                        {project.problemStatement && (
+                          <p className="font-serif text-[24px] md:text-[34px] leading-[1.15] text-espresso mb-6">
+                            {project.problemStatement}
+                          </p>
                         )}
+                        {project.problem && (
+                          <p className="text-[15px] md:text-[16px] leading-[28px] text-espresso/70">
+                            {project.problem}
+                          </p>
+                        )}
+                      </>
+                    }
+                    image={problemFigure}
+                    onImageClick={(src, alt, caption) => openLightbox(src, alt, caption)}
+                  />
+                  <SectionMedia items={mediaFor('problem')} onImageClick={openLightbox} />
+                </>
+              )}
+
+              {active.id === 'objective' && (
+                <>
+                  <AlternatingRow
+                    flip
+                    text={
+                      <>
+                        {project.objectiveStatement && (
+                          <p className="font-serif text-[24px] md:text-[34px] leading-[1.15] text-espresso mb-6">
+                            {project.objectiveStatement}
+                          </p>
+                        )}
+                        {project.objective && (
+                          <p className="text-[15px] md:text-[16px] leading-[28px] text-espresso/70">
+                            {project.objective}
+                          </p>
+                        )}
+                      </>
+                    }
+                    image={objectiveFigure}
+                    onImageClick={(src, alt, caption) => openLightbox(src, alt, caption)}
+                  />
+                  <SectionMedia items={mediaFor('objective')} onImageClick={openLightbox} />
+                </>
+              )}
+
+              {active.id === 'responsibilities' && (
+                <>
+                  <AlternatingRow
+                    flip={false}
+                    text={
+                      <>
+                        {project.roleStatement && (
+                          <p className="font-serif text-[24px] md:text-[34px] leading-[1.15] text-espresso mb-8">
+                            {project.roleStatement}
+                          </p>
+                        )}
+                        <div className="space-y-6">
+                          {responsibilities.map((r, j) => (
+                            <div key={r._key ?? j} className="flex gap-5 items-start">
+                              <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
+                              <div>
+                                {r.title && <p className="font-serif text-[20px] text-deep-teal mb-1">{r.title}</p>}
+                                {r.description && (
+                                  <p className="text-[15px] text-espresso/70 leading-[26px]">{r.description}</p>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    }
+                    image={roleFigure}
+                    onImageClick={(src, alt, caption) => openLightbox(src, alt, caption)}
+                  />
+                  <SectionMedia items={mediaFor('responsibilities')} onImageClick={openLightbox} />
+                </>
+              )}
+
+              {active.id === 'process' && (
+                <>
+                  {project.processStatement && (
+                    <p className="font-serif text-[28px] md:text-[38px] leading-[1.15] text-espresso max-w-[720px] mb-8">
+                      {project.processStatement}
+                    </p>
+                  )}
+                  <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
+                    {project.process?.map((p, j) => (
+                      <div key={p._key ?? j} className="flex gap-5 items-start">
+                        <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
+                        <div>
+                          <p className="font-serif text-[20px] text-deep-teal mb-1">{p.step}</p>
+                          <p className="text-[15px] text-espresso/70 leading-[26px]">{p.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <SectionMedia items={mediaFor('responsibilities')} />
-              </section>
-            )
-          }
+                    ))}
+                  </div>
+                  <SectionFigure {...processFigure} onImageClick={() => processFigure && openLightbox(processFigure.src, processFigure.alt, processFigure.caption)} />
+                  <SectionMedia items={mediaFor('process')} onImageClick={openLightbox} />
+                </>
+              )}
 
-          if (sect.id === 'process') {
-            return (
-              <section key={sect.id} id="process" className="scroll-mt-28 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-10">{label}</p>
-                <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
-                  {project.process?.map((p, j) => (
-                    <div key={p._key ?? j} className="flex gap-5 items-start">
-                      <span className="font-serif text-[24px] text-peacock/50 w-[40px] shrink-0">{num(j)}</span>
-                      <div>
-                        <p className="font-serif text-[20px] text-deep-teal mb-1">{p.step}</p>
-                        <p className="text-[15px] text-espresso/70 leading-[26px]">{p.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <SectionMedia items={mediaFor('process')} />
-              </section>
-            )
-          }
+              {active.id === 'challenges' && (
+                <>
+                  <AlternatingRow
+                    flip
+                    text={
+                      <>
+                        {project.challengesStatement && (
+                          <p className="font-serif text-[24px] md:text-[34px] leading-[1.15] text-espresso mb-8">
+                            {project.challengesStatement}
+                          </p>
+                        )}
+                        <ul className="space-y-4">
+                          {project.challenges?.map((c, j) => (
+                            <li key={j} className="flex gap-4 text-[16px] text-espresso/75 leading-[28px]">
+                              <span className="mt-[10px] shrink-0 w-[7px] h-[7px] rounded-full bg-peacock"></span>
+                              {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    }
+                    image={challengesFigure}
+                    onImageClick={(src, alt, caption) => openLightbox(src, alt, caption)}
+                  />
+                  <SectionMedia items={mediaFor('challenges')} onImageClick={openLightbox} />
+                </>
+              )}
 
-          if (sect.id === 'challenges') {
-            return (
-              <section key={sect.id} id="challenges" className="scroll-mt-28 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
-                <ul className="space-y-4 max-w-[760px]">
-                  {project.challenges?.map((c, j) => (
-                    <li key={j} className="flex gap-4 text-[16px] text-espresso/75 leading-[28px]">
-                      <span className="mt-[10px] shrink-0 w-[7px] h-[7px] rounded-full bg-peacock"></span>
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-                <SectionMedia items={mediaFor('challenges')} />
-              </section>
-            )
-          }
+              {active.id === 'results' && (
+                <>
+                  {project.resultsStatement && (
+                    <p className="font-serif text-[24px] md:text-[34px] leading-[1.15] text-espresso max-w-[720px] mb-10">
+                      {project.resultsStatement}
+                    </p>
+                  )}
 
-          if (sect.id === 'results') {
-            return (
-              <section key={sect.id} id="results" className="scroll-mt-28 mb-20">
-                <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
-                <div className="bg-deep-teal rounded-[24px] px-8 md:px-16 py-14 md:py-20 text-center">
-                  {(project.resultStats ?? []).length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
-                      {project.resultStats!.map((s) => (
-                        <div key={s._key} className="border-b sm:border-b-0 sm:border-r border-soft-aqua/20 last:border-0 pb-8 sm:pb-0">
-                          <p className="font-serif text-[44px] md:text-[56px] leading-none text-white">
+                  <AlternatingRow
+                    flip={false}
+                    text={
+                      <>
+                        {project.results && (
+                          <p className="text-[15px] md:text-[16px] leading-[28px] text-espresso/70">
+                            {project.results}
+                          </p>
+                        )}
+                        {project.tags && project.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-6">
+                            {project.tags.map((t) => (
+                              <span
+                                key={t}
+                                className="inline-flex items-center shrink-0 text-[11px] font-medium text-deep-teal bg-pastel-teal/50 px-3 py-1.5 rounded-full"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    }
+                    image={resultsFigure}
+                    onImageClick={(src, alt, caption) => openLightbox(src, alt, caption)}
+                  />
+
+                  <div className="border-t border-espresso/15"></div>
+
+                  {resultStats.length > 0 && (
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pt-10">
+                      {resultStats.map((s) => (
+                        <div key={s._key}>
+                          <p className="font-serif text-[40px] md:text-[56px] leading-none text-deep-teal">
                             {s.value}
                           </p>
                           {s.label && (
-                            <p className="mt-2 text-[12px] font-bold uppercase tracking-[2px] text-soft-aqua">
+                            <p className="mt-3 text-[12px] font-bold uppercase tracking-[2px] text-cocoa/60">
                               {s.label}
                             </p>
                           )}
@@ -437,40 +795,27 @@ export default function ProjectCaseStudy() {
                       ))}
                     </div>
                   )}
-                  {project.results && (
-                    <p className="font-serif text-[22px] md:text-[30px] leading-snug text-white max-w-[820px] mx-auto">
-                      {project.results}
-                    </p>
-                  )}
-                  {project.tags && project.tags.length > 0 && (
-                    <div className="flex flex-wrap justify-center gap-2 mt-8">
-                      {project.tags.map((t) => (
-                        <span key={t} className="inline-flex items-center shrink-0 text-[11px] font-medium text-soft-aqua bg-white/10 px-3 py-1.5 rounded-full">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <SectionMedia items={mediaFor('results')} />
-              </section>
-            )
-          }
 
-          return (
-            <section key={sect.id} id="lessons" className="scroll-mt-28 mb-20">
-              <p className="text-[11px] font-bold tracking-[2px] uppercase text-ocean mb-8">{label}</p>
-              <div className="space-y-5 max-w-[760px]">
-                {lessonsLearned.map((l, j) => (
-                  <p key={j} className="font-serif italic text-[22px] md:text-[26px] leading-snug text-espresso/80">
-                    {l}
-                  </p>
-                ))}
-              </div>
-              <SectionMedia items={mediaFor('lessons')} />
+                  <SectionMedia items={mediaFor('results')} onImageClick={openLightbox} />
+                </>
+              )}
+
+              {active.id === 'lessons' && (
+                <>
+                  <div className="space-y-5 max-w-[720px]">
+                    {lessonsLearned.map((l, j) => (
+                      <p key={j} className="font-serif text-[24px] md:text-[30px] leading-[1.3] text-espresso/80">
+                        {l}
+                      </p>
+                    ))}
+                  </div>
+                  <SectionFigure {...lessonsFigure} onImageClick={() => lessonsFigure && openLightbox(lessonsFigure.src, lessonsFigure.alt, lessonsFigure.caption)} />
+                  <SectionMedia items={mediaFor('lessons')} onImageClick={openLightbox} />
+                </>
+              )}
             </section>
-          )
-        })}
+          </div>
+        )}
 
         {/* Footer nav */}
         <footer className="border-t border-espresso/15 py-10 mb-16 flex items-center justify-between">
@@ -490,6 +835,15 @@ export default function ProjectCaseStudy() {
           )}
         </footer>
       </div>
+
+      {lightbox && (
+        <Lightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          caption={lightbox.caption}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </main>
   )
 }
